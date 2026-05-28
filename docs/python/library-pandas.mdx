@@ -1,0 +1,333 @@
+---
+sidebar_position: 9
+sidebar_label: Pandas
+title: Library Pandas
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Library Pandas
+Pandas adalah library Python yang digunakan untuk mengolah data berbentuk tabel. Jika NumPy kuat untuk perhitungan angka, maka pandas lebih nyaman digunakan ketika data memiliki nama kolom, baris, dan perlu disimpan kembali ke format seperti CSV atau Excel.
+
+Dalam soal praktikum, pandas sangat berguna untuk membaca data `x1` sampai `x5`, menambahkan kolom `xbar`, `R`, `BKA`, `BKB`, dan menentukan status data.
+
+## Instalasi dan Import
+Sebelum digunakan, pandas perlu di-install terlebih dahulu.
+
+```bash
+pip install pandas openpyxl
+```
+
+Setelah itu, pandas bisa digunakan dengan cara import berikut:
+
+```python
+import pandas as pd
+```
+
+> Penjelasan: `pd` adalah alias yang umum digunakan untuk pandas. `openpyxl` dibutuhkan ketika kita ingin membaca atau menulis file Excel `.xlsx`.
+
+## Membuat DataFrame
+DataFrame adalah struktur data utama di pandas. Bentuknya seperti tabel, yaitu memiliki baris dan kolom.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+print(data)
+```
+
+> Penjelasan: DataFrame dibuat dari dictionary. Key seperti `"nama"` dan `"nilai"` akan menjadi nama kolom.
+
+DataFrame juga bisa dibuat dari list bersarang.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame(
+    [
+        ["Budi", 80],
+        ["Ani", 90],
+        ["Citra", 75],
+    ],
+    columns=["nama", "nilai"],
+)
+
+print(data)
+```
+
+> Penjelasan: Parameter `columns` digunakan untuk memberi nama kolom pada DataFrame.
+
+## Membaca Data CSV dan Excel
+Pandas bisa membaca file CSV menggunakan `pd.read_csv()`.
+
+```python
+import pandas as pd
+
+data = pd.read_csv("nilai.csv")
+
+print(data)
+```
+
+Untuk membaca file Excel, gunakan `pd.read_excel()`.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("nilai.xlsx")
+
+print(data)
+```
+
+> Penjelasan: Setelah file dibaca, hasilnya menjadi DataFrame. DataFrame ini bisa langsung diolah seperti tabel.
+
+Jika Excel memiliki beberapa sheet, kita bisa memilih sheet tertentu.
+
+```python
+data = pd.read_excel("nilai.xlsx", sheet_name="Sheet1")
+
+print(data)
+```
+
+## Melihat Isi Data
+Saat bekerja dengan data, kita tidak selalu perlu menampilkan semua baris. Pandas menyediakan beberapa method untuk melihat ringkasan data.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("nilai.xlsx")
+
+print(data.head())
+print(data.tail())
+print(data.info())
+```
+
+Beberapa method yang sering digunakan:
+
+- `.head()` untuk melihat 5 baris pertama.
+- `.tail()` untuk melihat 5 baris terakhir.
+- `.info()` untuk melihat informasi kolom dan tipe data.
+- `.shape` untuk melihat jumlah baris dan kolom.
+
+```python
+print(data.shape)
+```
+
+> Penjelasan: `.shape` menghasilkan bentuk `(jumlah_baris, jumlah_kolom)`.
+
+## Mengambil Kolom
+Kolom pada DataFrame bisa diambil menggunakan nama kolom.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+print(data["nama"])
+print(data["nilai"])
+```
+
+> Penjelasan: `data["nilai"]` mengambil kolom `nilai`.
+
+Jika ingin mengambil beberapa kolom sekaligus, gunakan list nama kolom.
+
+```python
+print(data[["nama", "nilai"]])
+```
+
+## Menambahkan Kolom Baru
+Pandas memudahkan kita untuk menambahkan kolom baru berdasarkan kolom yang sudah ada.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+data["status"] = ["Lulus", "Lulus", "Lulus"]
+
+print(data)
+```
+
+> Penjelasan: Kolom baru dibuat dengan menulis `data["status"]`, lalu memberi nilai untuk setiap baris.
+
+Kolom baru juga bisa dibuat dari hasil perhitungan.
+
+```python
+data["nilai_bonus"] = data["nilai"] + 5
+
+print(data)
+```
+
+## Kondisi dengan Pandas
+Untuk membuat kolom berdasarkan kondisi, kita bisa menggunakan `.apply()` dan `lambda`.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 60],
+})
+
+data["status"] = data["nilai"].apply(lambda nilai: "Lulus" if nilai >= 75 else "Belum lulus")
+
+print(data)
+```
+
+> Penjelasan: `.apply()` menjalankan fungsi ke setiap nilai pada kolom. Lambda digunakan untuk menentukan status berdasarkan nilai.
+
+Cara lain adalah menggunakan kondisi langsung.
+
+```python
+data_lulus = data[data["nilai"] >= 75]
+
+print(data_lulus)
+```
+
+> Penjelasan: Kode di atas mengambil baris yang nilai pada kolom `nilai` lebih besar atau sama dengan 75.
+
+## Menghitung Xbar dan R
+Jika data memiliki kolom `x1` sampai `x5`, kita bisa menghitung rata-rata baris dan range baris dengan pandas.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "x1": [10, 9, 15],
+    "x2": [12, 10, 14],
+    "x3": [11, 12, 16],
+    "x4": [13, 11, 15],
+    "x5": [14, 13, 17],
+})
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+print(data)
+```
+
+> Penjelasan: `axis=1` berarti perhitungan dilakukan per baris. `xbar` adalah rata-rata dari `x1` sampai `x5`, sedangkan `R` adalah selisih nilai terbesar dan terkecil pada baris tersebut.
+
+## Menghitung BKA, BKB, dan Status
+Setelah mendapatkan `xbar` dan `R`, kita bisa menghitung BKA dan BKB.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "x1": [10, 9, 15, 11],
+    "x2": [12, 10, 14, 12],
+    "x3": [11, 12, 16, 10],
+    "x4": [13, 11, 15, 13],
+    "x5": [14, 13, 17, 12],
+})
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+rata_rata_xbar = data["xbar"].mean()
+rata_rata_r = data["R"].mean()
+
+data["BKA"] = rata_rata_xbar + (0.577 * rata_rata_r)
+data["BKB"] = rata_rata_xbar - (0.577 * rata_rata_r)
+
+data["status"] = data.apply(
+    lambda baris: "Terkendali" if baris["BKB"] <= baris["xbar"] <= baris["BKA"] else "Tidak terkendali",
+    axis=1,
+)
+
+print(data)
+```
+
+> Penjelasan: Kolom `BKA` dan `BKB` berisi nilai batas yang sama untuk setiap baris. Kolom `status` dibuat berdasarkan posisi `xbar` terhadap batas tersebut.
+
+## Moving Average dengan Pandas
+Moving average bisa dihitung menggunakan `.rolling()`.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nilai": [10, 12, 11, 13, 14, 15],
+})
+
+data["MA_3"] = data["nilai"].rolling(window=3).mean()
+
+print(data)
+```
+
+> Penjelasan: `rolling(window=3)` mengambil 3 data berurutan, lalu `.mean()` menghitung rata-ratanya.
+
+Pada beberapa baris awal, hasil moving average bisa kosong karena jumlah data belum cukup untuk membentuk window.
+
+## Menyimpan DataFrame
+DataFrame bisa disimpan ke CSV atau Excel.
+
+```python
+data.to_csv("hasil.csv", index=False)
+data.to_excel("hasil.xlsx", index=False)
+```
+
+> Penjelasan: `index=False` digunakan agar pandas tidak menyimpan index sebagai kolom tambahan.
+
+Jika ingin menyimpan hanya beberapa kolom, pilih kolomnya terlebih dahulu.
+
+```python
+kolom_output = ["xbar", "R", "BKA", "BKB", "status"]
+
+data[kolom_output].to_excel("hasil_ringkas.xlsx", index=False)
+```
+
+## Contoh Kasus Sederhana
+Contoh berikut membaca data dari Excel, menghitung kolom tambahan, lalu menyimpan hasilnya ke Excel baru.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+rata_rata_xbar = data["xbar"].mean()
+rata_rata_r = data["R"].mean()
+
+data["BKA"] = rata_rata_xbar + (0.577 * rata_rata_r)
+data["BKB"] = rata_rata_xbar - (0.577 * rata_rata_r)
+
+data["status"] = data.apply(
+    lambda baris: "Terkendali" if baris["BKB"] <= baris["xbar"] <= baris["BKA"] else "Tidak terkendali",
+    axis=1,
+)
+
+data.to_excel("hasil_pengukuran.xlsx", index=False)
+```
+
+> Penjelasan: Alur ini dekat dengan soal praktikum: baca data, tambah kolom hasil perhitungan, tentukan status, lalu simpan output.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat DataFrame dengan kolom `x1`, `x2`, `x3`, `x4`, dan `x5`.
+- Hitung kolom `xbar`.
+- Hitung kolom `R`.
+- Hitung kolom `BKA` dan `BKB`.
+- Buat kolom `status` berisi `"Terkendali"` atau `"Tidak terkendali"`.
+- Simpan hasil ke file CSV.
+- Simpan hasil ke file Excel.

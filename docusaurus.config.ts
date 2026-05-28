@@ -10,7 +10,7 @@ const isUserOrOrgPage =
 const config: Config = {
   title: 'Modul Asdos POS',
   tagline: 'Materi praktikum Pemrograman Open Source untuk R dan Python',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
   future: {
     v4: true,
   },

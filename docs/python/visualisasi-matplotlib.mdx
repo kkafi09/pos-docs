@@ -1,0 +1,227 @@
+---
+sidebar_position: 10
+sidebar_label: Matplotlib
+title: Visualisasi dengan Matplotlib
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Visualisasi dengan Matplotlib
+Matplotlib adalah library Python yang digunakan untuk membuat grafik. Dalam praktikum pengolahan data, grafik membantu kita melihat pola data dengan lebih mudah dibandingkan hanya membaca angka dalam tabel.
+
+Pada contoh soal, grafik line digunakan untuk menampilkan `xbar`, `BKA`, dan `BKB` secara bersamaan.
+
+## Instalasi dan Import
+Sebelum digunakan, Matplotlib perlu di-install terlebih dahulu.
+
+```bash
+pip install matplotlib
+```
+
+Setelah itu, import `pyplot` dari Matplotlib.
+
+```python
+import matplotlib.pyplot as plt
+```
+
+> Penjelasan: `plt` adalah alias yang umum digunakan untuk `matplotlib.pyplot`.
+
+## Membuat Grafik Line Sederhana
+Grafik line digunakan untuk menampilkan perubahan data dari satu titik ke titik berikutnya.
+
+```python
+import matplotlib.pyplot as plt
+
+nilai = [80, 90, 75, 85, 95]
+
+plt.plot(nilai)
+plt.show()
+```
+
+> Penjelasan: `plt.plot()` membuat grafik line, sedangkan `plt.show()` menampilkan grafik.
+
+Kita juga bisa menentukan nilai sumbu x.
+
+```python
+import matplotlib.pyplot as plt
+
+pertemuan = [1, 2, 3, 4, 5]
+nilai = [80, 90, 75, 85, 95]
+
+plt.plot(pertemuan, nilai)
+plt.show()
+```
+
+## Menambahkan Judul dan Label
+Grafik akan lebih mudah dibaca jika memiliki judul dan label sumbu.
+
+```python
+import matplotlib.pyplot as plt
+
+pertemuan = [1, 2, 3, 4, 5]
+nilai = [80, 90, 75, 85, 95]
+
+plt.plot(pertemuan, nilai)
+plt.title("Perkembangan Nilai")
+plt.xlabel("Pertemuan")
+plt.ylabel("Nilai")
+plt.show()
+```
+
+> Penjelasan: `plt.title()` memberi judul grafik, `plt.xlabel()` memberi label sumbu x, dan `plt.ylabel()` memberi label sumbu y.
+
+## Menambahkan Marker dan Warna
+Marker digunakan untuk memberi tanda pada setiap titik data.
+
+```python
+import matplotlib.pyplot as plt
+
+pertemuan = [1, 2, 3, 4, 5]
+nilai = [80, 90, 75, 85, 95]
+
+plt.plot(pertemuan, nilai, marker="o", color="green")
+plt.title("Perkembangan Nilai")
+plt.xlabel("Pertemuan")
+plt.ylabel("Nilai")
+plt.show()
+```
+
+> Penjelasan: `marker="o"` menampilkan titik pada setiap data, sedangkan `color="green"` mengatur warna garis.
+
+## Menampilkan Beberapa Garis
+Matplotlib bisa menampilkan beberapa garis dalam satu grafik. Ini berguna untuk membandingkan beberapa data.
+
+```python
+import matplotlib.pyplot as plt
+
+hari = [1, 2, 3, 4, 5]
+xbar = [12.0, 11.0, 15.4, 11.6, 12.8]
+bka = [14.2, 14.2, 14.2, 14.2, 14.2]
+bkb = [10.1, 10.1, 10.1, 10.1, 10.1]
+
+plt.plot(hari, xbar, marker="o", label="xbar")
+plt.plot(hari, bka, linestyle="--", label="BKA")
+plt.plot(hari, bkb, linestyle="--", label="BKB")
+
+plt.title("Grafik Xbar, BKA, dan BKB")
+plt.xlabel("Data ke-")
+plt.ylabel("Nilai")
+plt.legend()
+plt.show()
+```
+
+> Penjelasan: `label` digunakan untuk memberi nama setiap garis. `plt.legend()` menampilkan keterangan garis pada grafik.
+
+## Grafik dari DataFrame
+Jika data sudah diolah menggunakan pandas, kita bisa mengambil kolom DataFrame untuk dibuat grafik.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.DataFrame({
+    "xbar": [12.0, 11.0, 15.4, 11.6, 12.8],
+    "BKA": [14.2, 14.2, 14.2, 14.2, 14.2],
+    "BKB": [10.1, 10.1, 10.1, 10.1, 10.1],
+})
+
+data["nomor"] = range(1, len(data) + 1)
+
+plt.plot(data["nomor"], data["xbar"], marker="o", label="xbar")
+plt.plot(data["nomor"], data["BKA"], linestyle="--", label="BKA")
+plt.plot(data["nomor"], data["BKB"], linestyle="--", label="BKB")
+
+plt.title("Grafik Kendali Xbar")
+plt.xlabel("Data ke-")
+plt.ylabel("Nilai")
+plt.legend()
+plt.show()
+```
+
+> Penjelasan: Kolom `nomor` dibuat sebagai sumbu x. Kolom `xbar`, `BKA`, dan `BKB` digunakan sebagai nilai pada sumbu y.
+
+## Menyimpan Grafik
+Selain ditampilkan, grafik juga bisa disimpan sebagai file gambar.
+
+```python
+import matplotlib.pyplot as plt
+
+nilai = [80, 90, 75, 85, 95]
+
+plt.plot(nilai, marker="o")
+plt.title("Grafik Nilai")
+plt.savefig("grafik_nilai.png")
+plt.show()
+```
+
+> Penjelasan: `plt.savefig()` menyimpan grafik ke file. Format yang umum digunakan adalah `.png`, `.jpg`, atau `.pdf`.
+
+Jika ingin hasil gambar lebih rapi, tambahkan `dpi` dan `bbox_inches`.
+
+```python
+plt.savefig("grafik_nilai.png", dpi=300, bbox_inches="tight")
+```
+
+## Mengatur Ukuran Grafik
+Ukuran grafik bisa diatur menggunakan `plt.figure()`.
+
+```python
+import matplotlib.pyplot as plt
+
+nilai = [80, 90, 75, 85, 95]
+
+plt.figure(figsize=(8, 4))
+plt.plot(nilai, marker="o")
+plt.title("Grafik Nilai")
+plt.show()
+```
+
+> Penjelasan: `figsize=(8, 4)` berarti lebar grafik 8 dan tinggi grafik 4.
+
+## Contoh Kasus Xbar Chart
+Contoh berikut membaca data dari Excel, menghitung `xbar`, `R`, BKA, BKB, lalu membuat grafik line.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+rata_rata_xbar = data["xbar"].mean()
+rata_rata_r = data["R"].mean()
+
+data["BKA"] = rata_rata_xbar + (0.577 * rata_rata_r)
+data["BKB"] = rata_rata_xbar - (0.577 * rata_rata_r)
+data["nomor"] = range(1, len(data) + 1)
+
+plt.figure(figsize=(8, 4))
+plt.plot(data["nomor"], data["xbar"], marker="o", label="xbar")
+plt.plot(data["nomor"], data["BKA"], linestyle="--", label="BKA")
+plt.plot(data["nomor"], data["BKB"], linestyle="--", label="BKB")
+
+plt.title("Grafik Xbar, BKA, dan BKB")
+plt.xlabel("Data ke-")
+plt.ylabel("Nilai")
+plt.legend()
+plt.savefig("grafik_xbar.png", dpi=300, bbox_inches="tight")
+plt.show()
+```
+
+> Penjelasan: Contoh ini mengikuti kebutuhan soal praktikum, yaitu membuat grafik line untuk `xbar`, `BKA`, dan `BKB` secara bersama.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat list `xbar`, `BKA`, dan `BKB`.
+- Buat grafik line untuk ketiga data tersebut.
+- Tambahkan judul grafik.
+- Tambahkan label sumbu x dan sumbu y.
+- Tambahkan legend.
+- Simpan grafik ke file `.png`.
+- Buat versi lain yang datanya dibaca dari DataFrame pandas.

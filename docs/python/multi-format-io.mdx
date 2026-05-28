@@ -1,0 +1,226 @@
+---
+sidebar_position: 11
+sidebar_label: Multi-format I/O
+title: Membaca dan Menulis Multi-format
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Membaca dan Menulis Multi-format
+Dalam praktikum, data bisa datang dari berbagai format file seperti `.txt`, `.csv`, `.xlsx`, atau file teks lain. Setiap format memiliki cara baca dan tulis yang berbeda.
+
+Bagian ini membantu memilih alat yang tepat: kapan menggunakan `open()`, module `csv`, NumPy, atau pandas.
+
+## Perbandingan Format File
+Berikut ringkasan format file yang sering digunakan.
+
+| Format | Bentuk Data | Cocok Untuk | Tools yang Disarankan |
+| --- | --- | --- | --- |
+| `.txt` | Teks bebas atau angka per baris | Catatan, log, data sederhana | `open()` |
+| `.csv` | Tabel dipisahkan koma | Data tabel sederhana | `csv`, pandas, NumPy |
+| `.xlsx` | Tabel Excel | Data tabel dengan sheet | pandas |
+| `.npy` | Array NumPy | Data numerik NumPy | NumPy |
+
+> Penjelasan: Tidak semua file harus dibaca dengan pandas. Jika hanya membaca teks sederhana, `open()` sudah cukup. Jika datanya berbentuk tabel, pandas biasanya lebih nyaman.
+
+## Kapan Menggunakan Open
+Gunakan `open()` jika file berisi teks sederhana atau data yang formatnya tidak terlalu kompleks.
+
+```python
+with open("catatan.txt", "r") as file:
+    isi = file.read()
+
+print(isi)
+```
+
+> Penjelasan: `open()` cocok untuk file teks biasa seperti catatan, log, atau data angka yang ditulis satu per satu.
+
+Contoh membaca angka dari file TXT:
+
+```python
+nilai = []
+
+with open("nilai.txt", "r") as file:
+    for baris in file:
+        nilai.append(float(baris.strip()))
+
+print(nilai)
+```
+
+## Kapan Menggunakan CSV Module
+Gunakan module `csv` jika file berbentuk tabel sederhana dan kita tidak ingin menambah library baru.
+
+```python
+import csv
+
+with open("nilai.csv", "r") as file:
+    reader = csv.DictReader(file)
+
+    for baris in reader:
+        print(baris["nama"], baris["nilai"])
+```
+
+> Penjelasan: `csv.DictReader()` cocok jika file CSV memiliki header atau nama kolom.
+
+Untuk menulis CSV:
+
+```python
+import csv
+
+data = [
+    ["nama", "nilai"],
+    ["Budi", 80],
+    ["Ani", 90],
+]
+
+with open("hasil.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+```
+
+## Kapan Menggunakan NumPy
+Gunakan NumPy jika file berisi data numerik yang rapi, misalnya semua kolom berisi angka.
+
+```python
+import numpy as np
+
+data = np.loadtxt("data.csv", delimiter=",")
+
+print(data)
+```
+
+> Penjelasan: NumPy cocok untuk file numerik tanpa banyak kolom teks. Jika file memiliki nama, status, atau kolom campuran, pandas biasanya lebih mudah digunakan.
+
+Untuk menyimpan array ke CSV:
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11],
+    [9, 10, 12],
+])
+
+np.savetxt("hasil.csv", data, delimiter=",", fmt="%.2f")
+```
+
+## Kapan Menggunakan Pandas
+Gunakan pandas jika data berbentuk tabel dengan nama kolom, perlu menambah kolom baru, membaca Excel, atau menyimpan hasil ke berbagai format.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+print(data.head())
+```
+
+> Penjelasan: Pandas cocok untuk soal yang meminta membaca data tabel, menambahkan kolom `xbar`, `R`, `BKA`, `BKB`, dan menyimpan kembali hasilnya.
+
+Pandas juga bisa membaca CSV.
+
+```python
+data = pd.read_csv("data_pengukuran.csv")
+
+print(data.head())
+```
+
+## Tabel Pilihan Tools
+Berikut panduan cepat untuk memilih tools.
+
+| Kebutuhan | Tools |
+| --- | --- |
+| Membaca catatan `.txt` | `open()` |
+| Menulis laporan sederhana `.txt` | `open()` |
+| Membaca CSV tanpa install library tambahan | `csv` |
+| Membaca CSV numerik untuk perhitungan array | NumPy |
+| Membaca CSV dengan nama kolom | pandas |
+| Membaca Excel `.xlsx` | pandas |
+| Menambah kolom hasil perhitungan | pandas |
+| Membuat output Excel | pandas |
+| Membuat grafik dari kolom tabel | pandas + Matplotlib |
+
+> Penjelasan: Pilihan tools bergantung pada bentuk data dan output yang diminta.
+
+## Alur Kerja Praktikum
+Untuk soal pengolahan data, alur kerja yang umum digunakan adalah:
+
+1. Baca file input.
+2. Cek isi data.
+3. Pilih kolom yang dibutuhkan.
+4. Hitung kolom baru.
+5. Tentukan status atau kategori.
+6. Simpan hasil ke file output.
+7. Buat grafik jika diminta.
+
+Contoh alur menggunakan pandas:
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+data.to_excel("hasil_pengukuran.xlsx", index=False)
+```
+
+> Penjelasan: Pandas membuat alur baca data, olah kolom, dan simpan output menjadi lebih singkat.
+
+## Menyimpan ke Beberapa Format
+Kadang hasil pengolahan perlu disimpan ke lebih dari satu format.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+data.to_csv("hasil.csv", index=False)
+data.to_excel("hasil.xlsx", index=False)
+
+with open("hasil.txt", "w") as file:
+    for index, baris in data.iterrows():
+        file.write(f"{baris['nama']} - {baris['nilai']}\n")
+```
+
+> Penjelasan: Data yang sama bisa disimpan ke CSV, Excel, dan TXT sesuai kebutuhan output.
+
+## Kesalahan yang Sering Terjadi
+Beberapa kesalahan umum saat membaca dan menulis file:
+
+- Path file salah atau file tidak berada di folder yang sama.
+- Nama kolom tidak sesuai dengan file.
+- File Excel sedang dibuka sehingga tidak bisa ditulis ulang.
+- File CSV menggunakan pemisah selain koma.
+- Data angka terbaca sebagai string.
+
+Contoh mengecek nama kolom:
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+print(data.columns)
+```
+
+> Penjelasan: `data.columns` membantu memastikan nama kolom sesuai dengan yang akan dipanggil di kode.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Baca file `.txt` menggunakan `open()`.
+- Baca file `.csv` menggunakan pandas.
+- Baca file `.xlsx` menggunakan pandas.
+- Tambahkan kolom baru pada DataFrame.
+- Simpan hasil ke `.csv`.
+- Simpan hasil ke `.xlsx`.
+- Simpan ringkasan hasil ke `.txt`.
+- Jelaskan kapan kamu memilih `open()`, `csv`, NumPy, atau pandas.
