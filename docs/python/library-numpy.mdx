@@ -1,0 +1,497 @@
+---
+sidebar_position: 7
+---
+
+# Library NumPy
+Library adalah kumpulan kode siap pakai yang bisa membantu kita menyelesaikan pekerjaan tertentu. Di Python, salah satu library yang sering digunakan untuk perhitungan angka adalah NumPy.
+
+NumPy banyak digunakan untuk data analysis karena bisa mengolah array, matrix, rata-rata, penjumlahan, perkalian, dan operasi numerik lain dengan lebih ringkas dibandingkan cara manual menggunakan list.
+
+## Mengapa Menggunakan NumPy
+Pada materi sebelumnya, kita sudah membuat operasi matrix secara manual menggunakan nested list. Cara manual penting untuk memahami konsep, tetapi jika data semakin banyak, kode bisa menjadi panjang.
+
+Dengan NumPy, operasi yang sebelumnya membutuhkan beberapa `for loop` bisa ditulis lebih singkat.
+
+```python
+nilai = [80, 90, 75, 85, 95]
+
+total = 0
+
+for item in nilai:
+    total += item
+
+rata_rata = total / len(nilai)
+
+print(rata_rata)
+```
+
+Kode di atas bisa ditulis lebih ringkas dengan NumPy.
+
+```python
+import numpy as np
+
+nilai = np.array([80, 90, 75, 85, 95])
+
+print(np.mean(nilai))
+```
+
+> Penjelasan: `np.mean()` digunakan untuk menghitung rata-rata. Dengan NumPy, kita tidak perlu membuat perulangan manual untuk menjumlahkan semua data.
+
+## Instalasi dan Import NumPy
+Sebelum digunakan, NumPy perlu di-install terlebih dahulu.
+
+```bash
+pip install numpy
+```
+
+Jika menggunakan notebook atau environment yang sudah menyediakan NumPy, biasanya kita cukup langsung melakukan import.
+
+```python
+import numpy as np
+```
+
+> Penjelasan: `np` adalah alias atau nama pendek untuk NumPy. Penulisan ini umum digunakan agar kode lebih singkat.
+
+## Membuat Array
+Array adalah struktur data utama di NumPy. Bentuknya mirip list, tetapi lebih cocok untuk operasi numerik.
+
+```python
+import numpy as np
+
+nilai = np.array([80, 90, 75, 85, 95])
+
+print(nilai)
+print(type(nilai))
+```
+
+> Penjelasan: `np.array()` mengubah list Python menjadi array NumPy.
+
+Array juga bisa dibuat dari nested list.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+print(data)
+```
+
+> Penjelasan: Data di atas memiliki 3 baris dan 5 kolom. Bentuk seperti ini sering muncul saat kita memiliki beberapa observasi dengan beberapa nilai pengukuran.
+
+## Mengecek Ukuran Array
+Untuk mengecek ukuran array, gunakan `.shape`.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+print(data.shape)
+```
+
+> Penjelasan: Output `(3, 5)` berarti data memiliki 3 baris dan 5 kolom.
+
+Kita juga bisa mengambil jumlah baris dan kolom ke dalam variabel.
+
+```python
+jumlah_baris, jumlah_kolom = data.shape
+
+print(jumlah_baris)
+print(jumlah_kolom)
+```
+
+## Akses Data Array
+Array dua dimensi bisa diakses menggunakan index baris dan kolom.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+print(data[0, 0])
+print(data[1, 3])
+print(data[2, 4])
+```
+
+> Penjelasan: `data[0, 0]` mengambil data pada baris pertama kolom pertama. NumPy menggunakan tanda koma untuk memisahkan index baris dan kolom.
+
+Kita juga bisa mengambil satu baris atau satu kolom.
+
+```python
+print(data[0])
+print(data[:, 0])
+print(data[:, 1:4])
+```
+
+> Penjelasan: `data[0]` mengambil baris pertama. `data[:, 0]` mengambil semua baris pada kolom pertama. `data[:, 1:4]` mengambil kolom index 1 sampai 3.
+
+## Operasi Dasar Array
+NumPy bisa melakukan operasi langsung ke seluruh elemen array.
+
+```python
+import numpy as np
+
+nilai = np.array([10, 20, 30])
+
+print(nilai + 5)
+print(nilai - 5)
+print(nilai * 2)
+print(nilai / 2)
+```
+
+> Penjelasan: Operasi dilakukan ke setiap elemen array. Ini berbeda dengan list biasa yang tidak bisa langsung dikalikan atau ditambah dengan angka untuk operasi numerik per elemen.
+
+Contoh operasi antar array:
+
+```python
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a + b)
+print(a - b)
+print(a * b)
+```
+
+> Penjelasan: Operasi antar array dilakukan berdasarkan posisi elemen yang sama.
+
+## Rata-rata, Nilai Minimum, dan Maksimum
+NumPy menyediakan fungsi statistik dasar seperti rata-rata, nilai minimum, dan nilai maksimum.
+
+```python
+import numpy as np
+
+nilai = np.array([80, 90, 75, 85, 95])
+
+print(np.mean(nilai))
+print(np.min(nilai))
+print(np.max(nilai))
+print(np.sum(nilai))
+```
+
+Beberapa fungsi yang sering digunakan:
+
+- `np.mean()` untuk menghitung rata-rata.
+- `np.min()` untuk mengambil nilai paling kecil.
+- `np.max()` untuk mengambil nilai paling besar.
+- `np.sum()` untuk menjumlahkan data.
+
+> Penjelasan: Fungsi-fungsi tersebut membantu kita mengolah data numerik tanpa menulis perulangan manual.
+
+## Menghitung Xbar
+Dalam beberapa soal pengolahan data, kita diminta menghitung nilai rata-rata dari beberapa kolom, misalnya `x1` sampai `x5`. Nilai rata-rata ini sering disebut `xbar`.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+xbar = np.mean(data, axis=1)
+
+print(xbar)
+```
+
+> Penjelasan: `axis=1` berarti perhitungan dilakukan per baris. Jadi, setiap baris akan menghasilkan satu nilai rata-rata.
+
+Jika ingin menghitung rata-rata per kolom, gunakan `axis=0`.
+
+```python
+rata_rata_kolom = np.mean(data, axis=0)
+
+print(rata_rata_kolom)
+```
+
+> Penjelasan: `axis=0` berarti perhitungan dilakukan per kolom.
+
+## Menghitung Range
+Range dalam konteks data numerik adalah selisih antara nilai terbesar dan nilai terkecil. Jika data memiliki kolom `x1` sampai `x5`, range bisa dihitung per baris.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+r = np.max(data, axis=1) - np.min(data, axis=1)
+
+print(r)
+```
+
+> Penjelasan: `np.max(data, axis=1)` mengambil nilai terbesar pada setiap baris, sedangkan `np.min(data, axis=1)` mengambil nilai terkecil pada setiap baris.
+
+## Menghitung BKA dan BKB
+BKA dan BKB bisa digunakan sebagai batas atas dan batas bawah. Pada contoh sederhana ini, BKA dihitung dari rata-rata `xbar` ditambah `0.577` kali rata-rata `R`. BKB dihitung dari rata-rata `xbar` dikurangi `0.577` kali rata-rata `R`.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+xbar = np.mean(data, axis=1)
+r = np.max(data, axis=1) - np.min(data, axis=1)
+
+rata_rata_xbar = np.mean(xbar)
+rata_rata_r = np.mean(r)
+
+bka = rata_rata_xbar + (0.577 * rata_rata_r)
+bkb = rata_rata_xbar - (0.577 * rata_rata_r)
+
+print(xbar)
+print(r)
+print(bka)
+print(bkb)
+```
+
+> Penjelasan: `xbar` dan `r` dihitung per baris. Setelah itu, rata-rata dari `xbar` dan rata-rata dari `r` digunakan untuk menghitung BKA dan BKB.
+
+## Menentukan Status Terkendali
+Setelah BKA dan BKB didapatkan, kita bisa mengecek apakah nilai `xbar` berada di antara batas tersebut. Jika berada di antara BKA dan BKB, data dianggap terkendali.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+xbar = np.mean(data, axis=1)
+r = np.max(data, axis=1) - np.min(data, axis=1)
+
+bka = np.mean(xbar) + (0.577 * np.mean(r))
+bkb = np.mean(xbar) - (0.577 * np.mean(r))
+
+status = np.where((xbar <= bka) & (xbar >= bkb), "Terkendali", "Tidak terkendali")
+
+print(status)
+```
+
+> Penjelasan: `np.where()` digunakan untuk membuat pilihan berdasarkan kondisi. Jika kondisi bernilai `True`, hasilnya `"Terkendali"`. Jika `False`, hasilnya `"Tidak terkendali"`.
+
+## Menggabungkan Kolom Hasil
+Setelah menghitung `xbar`, `R`, BKA, BKB, dan status, kita bisa menggabungkannya menjadi satu array.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+])
+
+xbar = np.mean(data, axis=1)
+r = np.max(data, axis=1) - np.min(data, axis=1)
+
+bka = np.mean(xbar) + (0.577 * np.mean(r))
+bkb = np.mean(xbar) - (0.577 * np.mean(r))
+
+kolom_bka = np.full(len(data), bka)
+kolom_bkb = np.full(len(data), bkb)
+
+hasil = np.column_stack((data, xbar, r, kolom_bka, kolom_bkb))
+
+print(hasil)
+```
+
+> Penjelasan: `np.full()` membuat array dengan nilai yang sama berulang kali. `np.column_stack()` digunakan untuk menggabungkan beberapa kolom menjadi satu array baru.
+
+Pada contoh di atas, `status` tidak ikut digabung karena berisi teks. Untuk data campuran angka dan teks, biasanya kita menggunakan pandas. Namun untuk fokus NumPy, bagian utama yang dipelajari adalah perhitungan numeriknya.
+
+## Membaca Data CSV dengan NumPy
+NumPy bisa membaca file berbentuk teks atau CSV menggunakan `np.loadtxt()` atau `np.genfromtxt()`.
+
+Misalnya kita memiliki file `data.csv` seperti berikut:
+
+```text
+10,12,11,13,14
+9,10,12,11,13
+15,14,16,15,17
+```
+
+File tersebut bisa dibaca dengan:
+
+```python
+import numpy as np
+
+data = np.loadtxt("data.csv", delimiter=",")
+
+print(data)
+```
+
+> Penjelasan: `delimiter=","` memberi tahu NumPy bahwa setiap nilai pada file dipisahkan menggunakan koma.
+
+Jika file memiliki header, gunakan `skiprows=1`.
+
+```python
+data = np.loadtxt("data.csv", delimiter=",", skiprows=1)
+
+print(data)
+```
+
+Untuk file Excel seperti `.xls` atau `.xlsx`, NumPy bukan pilihan utama. Biasanya file Excel dibaca menggunakan pandas, lalu datanya bisa diubah menjadi array NumPy jika dibutuhkan.
+
+## Menyimpan Data dengan NumPy
+Array NumPy bisa disimpan ke file CSV menggunakan `np.savetxt()`.
+
+```python
+import numpy as np
+
+hasil = np.array([
+    [10, 12, 11, 13, 14, 12.0],
+    [9, 10, 12, 11, 13, 11.0],
+    [15, 14, 16, 15, 17, 15.4],
+])
+
+np.savetxt("hasil.csv", hasil, delimiter=",", fmt="%.2f")
+```
+
+> Penjelasan: `fmt="%.2f"` berarti angka disimpan dengan dua angka di belakang koma.
+
+## Moving Average
+Moving average adalah rata-rata bergerak dari beberapa data berurutan. Misalnya, jika kita ingin menghitung rata-rata setiap 3 data, maka data ke-1 sampai ke-3 dihitung, lalu data ke-2 sampai ke-4, dan seterusnya.
+
+```python
+import numpy as np
+
+data = np.array([10, 12, 11, 13, 14, 15])
+
+ma = []
+
+for i in range(len(data) - 2):
+    rata_rata = np.mean(data[i:i + 3])
+    ma.append(rata_rata)
+
+print(ma)
+```
+
+> Penjelasan: `data[i:i + 3]` mengambil 3 data berurutan. Setiap potongan data dihitung rata-ratanya menggunakan `np.mean()`.
+
+Kode tersebut juga bisa dibuat menjadi fungsi.
+
+```python
+import numpy as np
+
+def moving_average(data, ukuran_window):
+    hasil = []
+
+    for i in range(len(data) - ukuran_window + 1):
+        rata_rata = np.mean(data[i:i + ukuran_window])
+        hasil.append(rata_rata)
+
+    return np.array(hasil)
+
+
+data = np.array([10, 12, 11, 13, 14, 15])
+
+print(moving_average(data, 3))
+```
+
+> Penjelasan: `ukuran_window` menentukan berapa banyak data yang dihitung dalam setiap rata-rata.
+
+## Matrix dengan NumPy
+Operasi matrix juga bisa dilakukan dengan NumPy. Ini lebih ringkas dibandingkan membuat nested loop manual.
+
+```python
+import numpy as np
+
+a = np.array([
+    [1, 2],
+    [3, 4],
+])
+
+b = np.array([
+    [5, 6],
+    [7, 8],
+])
+
+print(a + b)
+print(a - b)
+print(a * 3)
+```
+
+> Penjelasan: Penjumlahan dan pengurangan matrix dilakukan berdasarkan posisi elemen yang sama. Perkalian dengan skalar mengalikan semua elemen matrix.
+
+Untuk perkalian matrix, gunakan operator `@` atau `np.matmul()`.
+
+```python
+print(a @ b)
+print(np.matmul(a, b))
+```
+
+> Penjelasan: Operator `@` melakukan perkalian matrix, bukan perkalian per elemen.
+
+Untuk menghitung determinan, gunakan `np.linalg.det()`.
+
+```python
+determinan = np.linalg.det(a)
+
+print(determinan)
+```
+
+> Penjelasan: `np.linalg.det()` menghitung determinan matrix. Hasil determinan dari NumPy bisa berupa bilangan desimal karena perhitungan dilakukan dengan tipe data numerik.
+
+## Contoh Kasus Sederhana
+Contoh berikut menggabungkan beberapa konsep: membaca data, menghitung `xbar`, menghitung `R`, membuat BKA dan BKB, lalu menentukan status.
+
+```python
+import numpy as np
+
+data = np.array([
+    [10, 12, 11, 13, 14],
+    [9, 10, 12, 11, 13],
+    [15, 14, 16, 15, 17],
+    [11, 12, 10, 13, 12],
+])
+
+xbar = np.mean(data, axis=1)
+r = np.max(data, axis=1) - np.min(data, axis=1)
+
+bka = np.mean(xbar) + (0.577 * np.mean(r))
+bkb = np.mean(xbar) - (0.577 * np.mean(r))
+
+status = np.where((xbar <= bka) & (xbar >= bkb), "Terkendali", "Tidak terkendali")
+
+for i in range(len(data)):
+    print(data[i], xbar[i], r[i], bka, bkb, status[i])
+```
+
+> Penjelasan: Contoh ini mirip dengan soal pengolahan data. Perbedaannya, perhitungan dilakukan menggunakan NumPy agar lebih ringkas.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat array NumPy berisi 5 kolom data angka dan minimal 5 baris.
+- Hitung `xbar` atau rata-rata setiap baris.
+- Hitung `R` atau range setiap baris.
+- Hitung rata-rata dari `xbar`.
+- Hitung rata-rata dari `R`.
+- Hitung BKA dengan rumus rata-rata `xbar` ditambah `0.577` kali rata-rata `R`.
+- Hitung BKB dengan rumus rata-rata `xbar` dikurangi `0.577` kali rata-rata `R`.
+- Tentukan status `"Terkendali"` atau `"Tidak terkendali"` menggunakan `np.where()`.
+- Buat fungsi `moving_average()` menggunakan NumPy.
+- Coba lakukan penjumlahan, perkalian, dan determinan matrix menggunakan NumPy.

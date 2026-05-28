@@ -1,0 +1,419 @@
+---
+sidebar_position: 8
+---
+
+# File System I/O
+File system I/O adalah proses membaca data dari file dan menulis data ke file. Dalam praktikum, bagian ini sering digunakan untuk membaca data dari `.txt`, `.csv`, atau Excel, lalu menyimpan hasil pengolahan ke file baru.
+
+I/O adalah singkatan dari Input dan Output. Input berarti program membaca data, sedangkan output berarti program menyimpan atau menampilkan hasil.
+
+## Mengenal Path File
+Sebelum membaca atau menulis file, kita perlu mengetahui lokasi file tersebut. Lokasi file disebut path.
+
+```python
+nama_file = "data.txt"
+
+print(nama_file)
+```
+
+> Penjelasan: Jika hanya menulis `"data.txt"`, Python akan mencari file tersebut di folder tempat program dijalankan.
+
+Untuk membuat path yang lebih rapi, kita bisa menggunakan `pathlib`.
+
+```python
+from pathlib import Path
+
+path_file = Path("data") / "nilai.txt"
+
+print(path_file)
+```
+
+> Penjelasan: `Path("data") / "nilai.txt"` berarti file `nilai.txt` berada di dalam folder `data`.
+
+Kita juga bisa mengecek apakah file sudah tersedia.
+
+```python
+from pathlib import Path
+
+path_file = Path("data") / "nilai.txt"
+
+print(path_file.exists())
+```
+
+> Penjelasan: `.exists()` menghasilkan `True` jika file atau folder tersedia, dan `False` jika tidak tersedia.
+
+## Membaca File TXT
+File `.txt` bisa dibaca menggunakan fungsi bawaan `open()`. Cara yang aman adalah menggunakan `with`, karena file akan otomatis ditutup setelah selesai dibaca.
+
+```python
+with open("data.txt", "r") as file:
+    isi = file.read()
+
+print(isi)
+```
+
+> Penjelasan: Mode `"r"` berarti read atau membaca file. `file.read()` digunakan untuk membaca seluruh isi file.
+
+Jika isi file terdiri dari beberapa baris, kita bisa membaca barisnya satu per satu.
+
+```python
+with open("data.txt", "r") as file:
+    for baris in file:
+        print(baris)
+```
+
+> Penjelasan: Perulangan `for` akan membaca isi file baris demi baris.
+
+Biasanya, setiap baris masih memiliki karakter baris baru. Untuk menghapusnya, gunakan `.strip()`.
+
+```python
+with open("data.txt", "r") as file:
+    for baris in file:
+        print(baris.strip())
+```
+
+## Membaca TXT Berisi Angka
+Jika file `.txt` berisi angka, data yang dibaca tetap berbentuk string. Agar bisa dihitung, data perlu diubah menjadi `int` atau `float`.
+
+Misalnya file `nilai.txt` berisi:
+
+```text
+80
+90
+75
+85
+```
+
+File tersebut bisa dibaca seperti ini:
+
+```python
+nilai = []
+
+with open("nilai.txt", "r") as file:
+    for baris in file:
+        nilai.append(float(baris.strip()))
+
+print(nilai)
+print(sum(nilai) / len(nilai))
+```
+
+> Penjelasan: Setiap baris dibersihkan menggunakan `.strip()`, lalu diubah menjadi `float` agar bisa digunakan dalam perhitungan.
+
+## Menulis File TXT
+Untuk menulis file `.txt`, gunakan mode `"w"`.
+
+```python
+with open("hasil.txt", "w") as file:
+    file.write("Halo, ini file hasil dari Python")
+```
+
+> Penjelasan: Mode `"w"` berarti write atau menulis file. Jika file belum ada, Python akan membuat file baru. Jika file sudah ada, isi lama akan diganti.
+
+Jika ingin menulis beberapa baris, tambahkan `\n`.
+
+```python
+nama = "Budi"
+nilai = 85
+
+with open("hasil.txt", "w") as file:
+    file.write(f"Nama: {nama}\n")
+    file.write(f"Nilai: {nilai}\n")
+```
+
+> Penjelasan: `\n` digunakan untuk membuat baris baru pada file teks.
+
+## Menambahkan Isi ke File TXT
+Jika ingin menambahkan isi tanpa menghapus isi lama, gunakan mode `"a"`.
+
+```python
+with open("log.txt", "a") as file:
+    file.write("Program selesai dijalankan\n")
+```
+
+> Penjelasan: Mode `"a"` berarti append. Data baru akan ditambahkan ke bagian akhir file.
+
+## Membuat Folder Output
+Saat menyimpan hasil, biasanya kita membuat folder khusus seperti `output` atau `hasil`. Jika folder belum ada, kita bisa membuatnya menggunakan `mkdir()`.
+
+```python
+from pathlib import Path
+
+folder_output = Path("output")
+folder_output.mkdir(exist_ok=True)
+
+with open(folder_output / "hasil.txt", "w") as file:
+    file.write("File ini disimpan di folder output")
+```
+
+> Penjelasan: `exist_ok=True` membuat Python tidak error jika folder `output` sudah ada.
+
+## Membaca File CSV
+CSV adalah file teks yang datanya dipisahkan oleh koma. File CSV sering digunakan untuk menyimpan data tabel.
+
+Misalnya file `nilai.csv` berisi:
+
+```text
+nama,nilai
+Budi,80
+Ani,90
+Citra,75
+```
+
+File tersebut bisa dibaca menggunakan module bawaan `csv`.
+
+```python
+import csv
+
+with open("nilai.csv", "r") as file:
+    reader = csv.reader(file)
+
+    for baris in reader:
+        print(baris)
+```
+
+> Penjelasan: `csv.reader()` membaca setiap baris sebagai list.
+
+Jika file memiliki header, kita bisa menggunakan `csv.DictReader()`.
+
+```python
+import csv
+
+with open("nilai.csv", "r") as file:
+    reader = csv.DictReader(file)
+
+    for baris in reader:
+        print(baris["nama"], baris["nilai"])
+```
+
+> Penjelasan: `DictReader()` membuat setiap baris bisa diakses menggunakan nama kolom.
+
+## Menulis File CSV
+Untuk menulis file CSV, gunakan `csv.writer()`.
+
+```python
+import csv
+
+data = [
+    ["nama", "nilai"],
+    ["Budi", 80],
+    ["Ani", 90],
+    ["Citra", 75],
+]
+
+with open("hasil.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+```
+
+> Penjelasan: `writer.writerows()` menulis banyak baris sekaligus. `newline=""` digunakan agar file CSV tidak memiliki baris kosong tambahan.
+
+## Membaca Excel
+Untuk membaca file Excel seperti `.xlsx`, kita bisa menggunakan library `pandas`. Library ini umum digunakan untuk membaca dan menulis data tabel.
+
+Install library yang dibutuhkan:
+
+```bash
+pip install pandas openpyxl
+```
+
+Contoh membaca file Excel:
+
+```python
+import pandas as pd
+
+data = pd.read_excel("nilai.xlsx")
+
+print(data)
+```
+
+> Penjelasan: `pd.read_excel()` membaca file Excel dan menyimpannya sebagai DataFrame. DataFrame adalah struktur data tabel yang disediakan oleh pandas.
+
+Jika file Excel memiliki beberapa sheet, kita bisa memilih sheet tertentu.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("nilai.xlsx", sheet_name="Sheet1")
+
+print(data)
+```
+
+> Penjelasan: `sheet_name="Sheet1"` berarti pandas akan membaca sheet dengan nama `Sheet1`.
+
+## Mengambil Kolom dari Excel
+Setelah file Excel dibaca, kita bisa mengambil kolom tertentu berdasarkan nama kolom.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("nilai.xlsx")
+
+nama = data["nama"]
+nilai = data["nilai"]
+
+print(nama)
+print(nilai)
+```
+
+> Penjelasan: `data["nilai"]` mengambil kolom bernama `nilai`.
+
+Kita juga bisa menghitung rata-rata kolom.
+
+```python
+rata_rata = data["nilai"].mean()
+
+print(rata_rata)
+```
+
+> Penjelasan: `.mean()` digunakan untuk menghitung rata-rata pada kolom numerik.
+
+## Menulis Output Excel
+Data hasil pengolahan bisa disimpan kembali ke file Excel menggunakan `.to_excel()`.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+data.to_excel("hasil.xlsx", index=False)
+```
+
+> Penjelasan: `index=False` digunakan agar pandas tidak menambahkan kolom index ke file Excel.
+
+Kita juga bisa menambahkan kolom baru sebelum menyimpan file.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+data["status"] = data["nilai"].apply(lambda nilai: "Lulus" if nilai >= 75 else "Belum lulus")
+
+data.to_excel("hasil_nilai.xlsx", index=False)
+```
+
+> Penjelasan: Kolom `status` dibuat berdasarkan nilai. Jika nilai lebih besar atau sama dengan 75, statusnya `"Lulus"`.
+
+## Membaca Excel untuk Data X1 sampai X5
+Dalam soal pengolahan data, file Excel sering berisi kolom seperti `x1`, `x2`, `x3`, `x4`, dan `x5`. Kita bisa membaca kolom tersebut, lalu menghitung rata-rata dan range.
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+print(data)
+```
+
+> Penjelasan: `axis=1` berarti perhitungan dilakukan per baris. Kolom `xbar` berisi rata-rata dari `x1` sampai `x5`, sedangkan kolom `R` berisi range setiap baris.
+
+Contoh menambahkan BKA, BKB, dan status:
+
+```python
+import pandas as pd
+
+data = pd.read_excel("data_pengukuran.xlsx")
+
+kolom_x = ["x1", "x2", "x3", "x4", "x5"]
+
+data["xbar"] = data[kolom_x].mean(axis=1)
+data["R"] = data[kolom_x].max(axis=1) - data[kolom_x].min(axis=1)
+
+rata_rata_xbar = data["xbar"].mean()
+rata_rata_r = data["R"].mean()
+
+data["BKA"] = rata_rata_xbar + (0.577 * rata_rata_r)
+data["BKB"] = rata_rata_xbar - (0.577 * rata_rata_r)
+
+data["status"] = data.apply(
+    lambda baris: "Terkendali" if baris["BKB"] <= baris["xbar"] <= baris["BKA"] else "Tidak terkendali",
+    axis=1,
+)
+
+data.to_excel("hasil_pengukuran.xlsx", index=False)
+```
+
+> Penjelasan: Data dibaca dari Excel, dihitung kolom tambahannya, lalu disimpan kembali ke file Excel baru.
+
+## Menulis Output TXT dari Data
+Selain Excel, hasil pengolahan juga bisa disimpan ke file `.txt`.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra"],
+    "nilai": [80, 90, 75],
+})
+
+with open("laporan_nilai.txt", "w") as file:
+    for index, baris in data.iterrows():
+        file.write(f"{baris['nama']} - {baris['nilai']}\n")
+```
+
+> Penjelasan: `.iterrows()` digunakan untuk membaca DataFrame baris demi baris, lalu setiap baris ditulis ke file `.txt`.
+
+## Mode File
+Saat menggunakan `open()`, ada beberapa mode file yang sering digunakan.
+
+- `"r"` untuk membaca file.
+- `"w"` untuk menulis file dan mengganti isi lama.
+- `"a"` untuk menambahkan isi ke akhir file.
+- `"x"` untuk membuat file baru dan error jika file sudah ada.
+
+```python
+with open("contoh.txt", "x") as file:
+    file.write("File baru")
+```
+
+> Penjelasan: Mode `"x"` berguna ketika kita ingin memastikan file lama tidak tertimpa.
+
+## Error yang Sering Terjadi
+Saat bekerja dengan file, ada beberapa error yang sering muncul.
+
+- `FileNotFoundError` muncul ketika file yang dibaca tidak ditemukan.
+- `PermissionError` muncul ketika program tidak punya izin membaca atau menulis file.
+- `KeyError` muncul ketika nama kolom yang diambil tidak ada.
+- `ValueError` bisa muncul ketika isi file tidak sesuai dengan format yang diharapkan.
+
+Contoh menangani file yang tidak ditemukan:
+
+```python
+from pathlib import Path
+
+path_file = Path("nilai.txt")
+
+if path_file.exists():
+    with open(path_file, "r") as file:
+        print(file.read())
+else:
+    print("File tidak ditemukan")
+```
+
+> Penjelasan: Sebelum membaca file, program mengecek dulu apakah file tersedia.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat file `nilai.txt` yang berisi beberapa angka.
+- Baca file tersebut menggunakan `open()`.
+- Hitung rata-rata dari angka yang ada di file.
+- Simpan hasil rata-rata ke file `hasil.txt`.
+- Buat file `nilai.csv` berisi kolom `nama` dan `nilai`.
+- Baca file CSV menggunakan `csv.DictReader()`.
+- Simpan hasil pengolahan ke file CSV baru.
+- Baca file Excel yang memiliki kolom `x1` sampai `x5`.
+- Tambahkan kolom `xbar`, `R`, `BKA`, `BKB`, dan `status`.
+- Simpan hasil akhirnya ke file Excel baru.

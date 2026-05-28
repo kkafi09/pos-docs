@@ -1,0 +1,382 @@
+---
+sidebar_position: 6
+---
+
+# Fungsi
+Fungsi adalah blok kode yang dibuat untuk menjalankan tugas tertentu. Dengan fungsi, kode bisa ditulis lebih rapi, mudah dibaca, dan bisa digunakan kembali tanpa perlu menulis ulang logika yang sama.
+
+Sebelum masuk ke fungsi, kita perlu memahami scope, yaitu area tempat suatu variabel bisa diakses.
+
+## Scope
+Scope menentukan di mana suatu variabel bisa digunakan. Di Python, scope yang paling sering ditemui adalah local scope dan global scope.
+
+### Local Scope
+Local scope adalah area variabel yang dibuat di dalam fungsi. Variabel local hanya bisa digunakan di dalam fungsi tersebut.
+
+```python
+def tampilkan_nama():
+    nama = "Budi"
+    print(nama)
+
+
+tampilkan_nama()
+```
+
+> Penjelasan: Variabel `nama` dibuat di dalam fungsi `tampilkan_nama()`, sehingga variabel tersebut hanya bisa digunakan di dalam fungsi itu.
+
+Jika kita mencoba mengakses variabel local dari luar fungsi, Python akan menghasilkan error.
+
+```python
+def tampilkan_nama():
+    nama = "Budi"
+
+
+tampilkan_nama()
+print(nama)
+```
+
+> Penjelasan: Variabel `nama` tidak dikenal di luar fungsi karena variabel tersebut berada pada local scope.
+
+### Global Scope
+Global scope adalah area variabel yang dibuat di luar fungsi. Variabel global bisa diakses dari dalam dan luar fungsi.
+
+```python
+mata_kuliah = "Pemrograman Open Source"
+
+def tampilkan_mata_kuliah():
+    print(mata_kuliah)
+
+
+tampilkan_mata_kuliah()
+print(mata_kuliah)
+```
+
+> Penjelasan: Variabel `mata_kuliah` dibuat di luar fungsi, sehingga bisa digunakan di dalam fungsi dan juga di luar fungsi.
+
+Namun, jika ingin mengubah nilai variabel global dari dalam fungsi, kita perlu berhati-hati.
+
+```python
+jumlah = 10
+
+def tambah_jumlah():
+    jumlah = 20
+    print(jumlah)
+
+
+tambah_jumlah()
+print(jumlah)
+```
+
+> Penjelasan: Variabel `jumlah` di dalam fungsi adalah variabel local yang berbeda dari variabel `jumlah` di luar fungsi. Karena itu, nilai global tetap `10`.
+
+Untuk benar-benar mengubah variabel global dari dalam fungsi, gunakan keyword `global`.
+
+```python
+jumlah = 10
+
+def tambah_jumlah():
+    global jumlah
+    jumlah = 20
+
+
+tambah_jumlah()
+print(jumlah)
+```
+
+> Penjelasan: Keyword `global` memberi tahu Python bahwa variabel `jumlah` yang digunakan di dalam fungsi adalah variabel global.
+
+Walaupun bisa digunakan, `global` sebaiknya tidak terlalu sering dipakai. Kode biasanya lebih mudah dibaca jika fungsi menerima input melalui parameter dan mengembalikan hasil menggunakan `return`.
+
+## Membuat Fungsi
+Fungsi dibuat menggunakan keyword `def`, diikuti nama fungsi, tanda kurung, dan tanda titik dua (`:`).
+
+```python
+def sapa():
+    print("Halo, selamat belajar Python")
+
+
+sapa()
+```
+
+> Penjelasan: Fungsi `sapa()` dibuat untuk menampilkan teks. Fungsi tidak akan berjalan sebelum dipanggil menggunakan `sapa()`.
+
+Nama fungsi sebaiknya ditulis dengan huruf kecil dan menggunakan underscore jika terdiri dari beberapa kata.
+
+```python
+def tampilkan_menu():
+    print("1. Tambah data")
+    print("2. Lihat data")
+    print("3. Keluar")
+
+
+tampilkan_menu()
+```
+
+## Parameter dan Argumen
+Parameter adalah variabel yang ditulis di dalam tanda kurung saat fungsi dibuat. Argumen adalah nilai yang dikirim ketika fungsi dipanggil.
+
+```python
+def sapa(nama):
+    print(f"Halo, {nama}")
+
+
+sapa("Budi")
+sapa("Ani")
+```
+
+> Penjelasan: `nama` adalah parameter, sedangkan `"Budi"` dan `"Ani"` adalah argumen yang dikirim ke fungsi.
+
+Fungsi juga bisa memiliki lebih dari satu parameter.
+
+```python
+def tampilkan_data(nama, nilai):
+    print(f"Nama: {nama}")
+    print(f"Nilai: {nilai}")
+
+
+tampilkan_data("Budi", 85)
+```
+
+> Penjelasan: Saat fungsi dipanggil, urutan argumen harus sesuai dengan urutan parameter.
+
+## Default Parameter
+Default parameter digunakan untuk memberi nilai awal pada parameter. Jika argumen tidak dikirim, fungsi akan menggunakan nilai default tersebut.
+
+```python
+def sapa(nama="Mahasiswa"):
+    print(f"Halo, {nama}")
+
+
+sapa()
+sapa("Budi")
+```
+
+> Penjelasan: Saat `sapa()` dipanggil tanpa argumen, parameter `nama` menggunakan nilai default `"Mahasiswa"`.
+
+## Keyword Argument
+Keyword argument digunakan untuk mengirim argumen berdasarkan nama parameternya. Cara ini membuat pemanggilan fungsi lebih jelas, terutama jika parameternya banyak.
+
+```python
+def tampilkan_data(nama, kelas, nilai):
+    print(f"Nama: {nama}")
+    print(f"Kelas: {kelas}")
+    print(f"Nilai: {nilai}")
+
+
+tampilkan_data(nama="Budi", kelas="A", nilai=85)
+```
+
+> Penjelasan: Karena argumen dikirim berdasarkan nama parameter, urutannya tidak harus selalu sama.
+
+```python
+tampilkan_data(nilai=90, nama="Ani", kelas="B")
+```
+
+## Return Value
+`return` digunakan untuk mengembalikan hasil dari fungsi. Nilai yang dikembalikan bisa disimpan ke variabel atau langsung digunakan.
+
+```python
+def tambah(a, b):
+    hasil = a + b
+    return hasil
+
+
+total = tambah(10, 5)
+
+print(total)
+```
+
+> Penjelasan: Fungsi `tambah()` mengembalikan hasil penjumlahan. Hasil tersebut kemudian disimpan ke variabel `total`.
+
+Fungsi yang menggunakan `return` lebih fleksibel karena hasilnya bisa dipakai lagi untuk operasi lain.
+
+```python
+def hitung_diskon(harga, diskon):
+    potongan = harga * diskon
+    return harga - potongan
+
+
+harga_akhir = hitung_diskon(100000, 0.1)
+
+print(harga_akhir)
+```
+
+## Fungsi dengan List
+Fungsi juga bisa menerima list sebagai parameter. Ini sering digunakan ketika kita ingin mengolah banyak data.
+
+```python
+def hitung_rata_rata(nilai):
+    total = 0
+
+    for item in nilai:
+        total += item
+
+    return total / len(nilai)
+
+
+daftar_nilai = [80, 90, 75, 85]
+
+print(hitung_rata_rata(daftar_nilai))
+```
+
+> Penjelasan: Fungsi `hitung_rata_rata()` menerima list nilai, menjumlahkan semua isinya, lalu membagi total dengan jumlah data.
+
+Contoh lain, fungsi untuk mengambil nilai yang lulus.
+
+```python
+def ambil_nilai_lulus(nilai):
+    nilai_lulus = []
+
+    for item in nilai:
+        if item >= 75:
+            nilai_lulus.append(item)
+
+    return nilai_lulus
+
+
+daftar_nilai = [60, 80, 90, 70, 85]
+
+print(ambil_nilai_lulus(daftar_nilai))
+```
+
+## Fungsi dengan Banyak Return
+Fungsi bisa mengembalikan lebih dari satu nilai. Biasanya, nilai tersebut akan diterima dalam beberapa variabel.
+
+```python
+def hitung_nilai(nilai):
+    nilai_tertinggi = max(nilai)
+    nilai_terendah = min(nilai)
+    rata_rata = sum(nilai) / len(nilai)
+
+    return nilai_tertinggi, nilai_terendah, rata_rata
+
+
+daftar_nilai = [80, 90, 75, 85]
+tertinggi, terendah, rata_rata = hitung_nilai(daftar_nilai)
+
+print(tertinggi)
+print(terendah)
+print(rata_rata)
+```
+
+> Penjelasan: Fungsi `hitung_nilai()` mengembalikan tiga nilai sekaligus. Nilai tersebut diterima oleh variabel `tertinggi`, `terendah`, dan `rata_rata`.
+
+## Anonymous Function
+Anonymous function adalah fungsi tanpa nama. Di Python, anonymous function biasanya dibuat menggunakan `lambda`.
+
+Fungsi biasa ditulis seperti ini:
+
+```python
+def kuadrat(angka):
+    return angka ** 2
+
+
+print(kuadrat(5))
+```
+
+Fungsi yang sama bisa ditulis menggunakan `lambda`.
+
+```python
+kuadrat = lambda angka: angka ** 2
+
+print(kuadrat(5))
+```
+
+> Penjelasan: `lambda angka: angka ** 2` berarti fungsi menerima parameter `angka` dan mengembalikan `angka ** 2`.
+
+Walaupun disebut anonymous function, pada contoh di atas hasil lambda tetap disimpan ke variabel `kuadrat` agar bisa dipanggil kembali.
+
+## Lambda
+`lambda` cocok digunakan untuk fungsi pendek yang hanya memiliki satu ekspresi. Lambda biasanya dipakai ketika fungsi hanya dibutuhkan sementara.
+
+```python
+tambah = lambda a, b: a + b
+
+print(tambah(10, 5))
+```
+
+> Penjelasan: Lambda di atas menerima dua parameter, yaitu `a` dan `b`, lalu mengembalikan hasil penjumlahannya.
+
+Lambda juga sering digunakan bersama fungsi seperti `map()`, `filter()`, dan `sorted()`.
+
+### Lambda dengan Map
+`map()` digunakan untuk menerapkan fungsi ke setiap elemen dalam list.
+
+```python
+nilai = [1, 2, 3, 4, 5]
+
+kuadrat = list(map(lambda angka: angka ** 2, nilai))
+
+print(kuadrat)
+```
+
+> Penjelasan: Lambda dijalankan untuk setiap elemen di dalam list `nilai`. Hasilnya kemudian diubah kembali menjadi list.
+
+### Lambda dengan Filter
+`filter()` digunakan untuk menyaring data berdasarkan kondisi tertentu.
+
+```python
+nilai = [60, 80, 90, 70, 85]
+
+nilai_lulus = list(filter(lambda angka: angka >= 75, nilai))
+
+print(nilai_lulus)
+```
+
+> Penjelasan: Lambda menghasilkan `True` untuk nilai yang lebih besar atau sama dengan 75. Hanya nilai yang memenuhi kondisi tersebut yang masuk ke `nilai_lulus`.
+
+### Lambda dengan Sorted
+`sorted()` digunakan untuk mengurutkan data. Dengan lambda, kita bisa menentukan bagian data mana yang dipakai sebagai dasar pengurutan.
+
+```python
+data_mahasiswa = [
+    ["Budi", 80],
+    ["Ani", 90],
+    ["Citra", 75],
+]
+
+hasil = sorted(data_mahasiswa, key=lambda mahasiswa: mahasiswa[1])
+
+print(hasil)
+```
+
+> Penjelasan: Data diurutkan berdasarkan nilai mahasiswa, yaitu data pada index 1.
+
+## Kapan Menggunakan Fungsi Biasa dan Lambda
+Fungsi biasa dan lambda sama-sama bisa digunakan untuk membuat fungsi, tetapi penggunaannya berbeda.
+
+- Gunakan fungsi biasa dengan `def` jika logika fungsi lebih dari satu baris.
+- Gunakan fungsi biasa jika fungsi tersebut akan sering digunakan.
+- Gunakan lambda jika fungsi sangat pendek dan hanya dibutuhkan sementara.
+- Hindari lambda yang terlalu panjang karena bisa membuat kode sulit dibaca.
+
+```python
+def hitung_grade(nilai):
+    if nilai >= 90:
+        return "A"
+    elif nilai >= 80:
+        return "B"
+    elif nilai >= 70:
+        return "C"
+    else:
+        return "D"
+
+
+print(hitung_grade(85))
+```
+
+> Penjelasan: Contoh di atas lebih cocok menggunakan fungsi biasa karena memiliki beberapa kondisi dan lebih dari satu baris logika.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel global `nama_kelas`.
+- Buat fungsi yang menampilkan `nama_kelas`.
+- Buat fungsi `hitung_luas_persegi_panjang()` dengan parameter `panjang` dan `lebar`.
+- Buat fungsi `hitung_rata_rata()` yang menerima list nilai.
+- Buat fungsi yang mengembalikan nilai tertinggi, nilai terendah, dan rata-rata.
+- Buat lambda untuk menghitung kuadrat sebuah angka.
+- Gunakan `map()` dan lambda untuk mengubah list angka menjadi list kuadrat.
+- Gunakan `filter()` dan lambda untuk mengambil nilai yang lebih besar atau sama dengan 75.
+- Buat contoh `sorted()` dengan lambda untuk mengurutkan nested list berdasarkan nilai.

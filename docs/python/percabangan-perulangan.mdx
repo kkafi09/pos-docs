@@ -1,0 +1,252 @@
+---
+sidebar_position: 3
+---
+
+# Percabangan dan Perulangan
+Percabangan dan perulangan digunakan untuk membuat program lebih dinamis. Percabangan membantu program mengambil keputusan, sedangkan perulangan membantu program menjalankan kode yang sama berkali-kali.
+
+## Percabangan
+Percabangan digunakan ketika program perlu memilih aksi berdasarkan kondisi tertentu. Di Python, kondisi biasanya menghasilkan nilai boolean, yaitu `True` atau `False`.
+
+### If
+`if` digunakan untuk menjalankan kode jika suatu kondisi bernilai `True`.
+
+```python
+nilai = 85
+
+if nilai >= 75:
+    print("Mahasiswa lulus")
+```
+
+> Penjelasan: Karena nilai `85` lebih besar atau sama dengan `75`, maka kondisi bernilai `True` dan program akan menampilkan "Mahasiswa lulus".
+
+Bagian kode yang berada di dalam `if` harus ditulis menjorok ke kanan. Penulisan ini disebut indentation.
+
+```python
+nilai = 60
+
+if nilai >= 75:
+    print("Mahasiswa lulus")
+    print("Selamat")
+```
+
+Pada contoh di atas, tidak ada output yang muncul karena kondisi `nilai >= 75` bernilai `False`.
+
+### If Else
+`else` digunakan untuk menjalankan kode ketika kondisi pada `if` bernilai `False`.
+
+```python
+nilai = 60
+
+if nilai >= 75:
+    print("Mahasiswa lulus")
+else:
+    print("Mahasiswa belum lulus")
+```
+
+> Penjelasan: Karena nilai `60` belum mencapai `75`, bagian `if` tidak dijalankan. Program akan menjalankan bagian `else`.
+
+`else` tidak memiliki kondisi sendiri. Bagian ini hanya menjadi pilihan terakhir ketika kondisi sebelumnya tidak terpenuhi.
+
+### Else If
+Di Python, `else if` ditulis menggunakan `elif`. `elif` digunakan ketika program perlu mengecek lebih dari satu kondisi.
+
+```python
+nilai = 85
+
+if nilai >= 90:
+    print("Grade A")
+elif nilai >= 80:
+    print("Grade B")
+elif nilai >= 70:
+    print("Grade C")
+else:
+    print("Grade D")
+```
+
+> Penjelasan: Python akan mengecek kondisi dari atas ke bawah. Karena `nilai >= 90` bernilai `False`, Python lanjut mengecek `nilai >= 80`. Kondisi tersebut bernilai `True`, sehingga program menampilkan "Grade B".
+
+Urutan kondisi sangat penting. Letakkan kondisi yang lebih spesifik atau lebih tinggi terlebih dahulu.
+
+```python
+nilai = 95
+
+if nilai >= 70:
+    print("Lulus")
+elif nilai >= 90:
+    print("Lulus dengan nilai sangat baik")
+```
+
+> Penjelasan: Pada contoh di atas, kondisi `nilai >= 70` sudah terpenuhi terlebih dahulu. Akibatnya, bagian `elif nilai >= 90` tidak akan dijalankan meskipun nilainya juga memenuhi.
+
+## Perulangan
+Perulangan digunakan untuk menjalankan kode yang sama beberapa kali. Dengan perulangan, kita tidak perlu menulis kode berulang secara manual.
+
+### For Loop
+`for` digunakan untuk mengulang data yang memiliki urutan, seperti `list`, `string`, atau `range()`.
+
+```python
+daftar_materi = ["Python", "Git", "R"]
+
+for materi in daftar_materi:
+    print(materi)
+```
+
+> Penjelasan: Variabel `materi` akan mengambil isi dari `daftar_materi` satu per satu. Setiap nilai kemudian ditampilkan menggunakan `print()`.
+
+`for` juga sering digunakan bersama `range()` ketika kita ingin mengulang kode berdasarkan jumlah tertentu.
+
+```python
+for angka in range(1, 6):
+    print(angka)
+```
+
+> Penjelasan: `range(1, 6)` menghasilkan angka dari 1 sampai 5. Angka 6 tidak ikut ditampilkan karena batas akhir pada `range()` tidak termasuk.
+
+Kita juga bisa menggunakan `for` untuk membaca setiap karakter dalam string.
+
+```python
+kata = "Python"
+
+for huruf in kata:
+    print(huruf)
+```
+
+### While Loop
+`while` digunakan untuk mengulang kode selama kondisi masih bernilai `True`.
+
+```python
+angka = 1
+
+while angka <= 5:
+    print(angka)
+    angka += 1
+```
+
+> Penjelasan: Selama `angka <= 5` bernilai `True`, program akan terus menjalankan isi `while`. Nilai `angka` ditambah 1 setiap perulangan agar perulangan bisa berhenti.
+
+Perlu hati-hati saat menggunakan `while`. Jika kondisi selalu bernilai `True`, program bisa masuk ke infinite loop.
+
+```python
+angka = 1
+
+while angka <= 5:
+    print(angka)
+```
+
+> Penjelasan: Contoh di atas akan terus berjalan karena nilai `angka` tidak pernah berubah. Karena itu, pastikan ada perubahan nilai yang membuat kondisi akhirnya menjadi `False`.
+
+## Continue, Pass, dan Break
+`continue`, `pass`, dan `break` sama-sama digunakan untuk mengontrol alur program, terutama di dalam perulangan. Meskipun terlihat mirip, ketiganya memiliki fungsi yang berbeda.
+
+### Continue
+`continue` digunakan untuk melewati sisa kode pada perulangan saat ini, lalu lanjut ke perulangan berikutnya.
+
+```python
+for angka in range(1, 6):
+    if angka == 3:
+        continue
+
+    print(angka)
+```
+
+> Penjelasan: Saat `angka` bernilai `3`, perintah `continue` dijalankan. Akibatnya, `print(angka)` dilewati untuk angka 3, lalu perulangan lanjut ke angka berikutnya.
+
+Output dari program di atas adalah:
+
+```text
+1
+2
+4
+5
+```
+
+### Break
+`break` digunakan untuk menghentikan perulangan secara paksa, meskipun kondisi perulangan masih bisa berjalan.
+
+```python
+for angka in range(1, 6):
+    if angka == 3:
+        break
+
+    print(angka)
+```
+
+> Penjelasan: Saat `angka` bernilai `3`, perintah `break` dijalankan. Perulangan langsung berhenti, sehingga angka 3, 4, dan 5 tidak ditampilkan.
+
+Output dari program di atas adalah:
+
+```text
+1
+2
+```
+
+### Pass
+`pass` digunakan sebagai kode kosong. Biasanya `pass` dipakai ketika kita belum ingin menulis isi dari suatu blok kode, tetapi struktur program tetap harus valid.
+
+```python
+nilai = 85
+
+if nilai >= 75:
+    pass
+else:
+    print("Mahasiswa belum lulus")
+```
+
+> Penjelasan: Bagian `if` tidak melakukan apa-apa karena berisi `pass`. Tanpa `pass`, Python akan error karena blok `if` tidak boleh kosong.
+
+`pass` juga bisa digunakan sementara saat membuat kerangka program.
+
+```python
+for angka in range(1, 6):
+    pass
+```
+
+Program di atas valid, tetapi tidak menghasilkan output apa pun.
+
+### Perbedaan Continue, Pass, dan Break
+Perbedaan utama dari ketiganya ada pada efek terhadap alur program.
+
+- `continue` melewati sisa kode pada perulangan saat ini, lalu lanjut ke perulangan berikutnya.
+- `break` menghentikan perulangan sepenuhnya.
+- `pass` tidak melakukan apa-apa dan hanya menjadi placeholder agar blok kode tetap valid.
+
+Contoh perbandingan sederhana:
+
+```python
+for angka in range(1, 6):
+    if angka == 3:
+        continue
+
+    print("Continue:", angka)
+```
+
+```python
+for angka in range(1, 6):
+    if angka == 3:
+        break
+
+    print("Break:", angka)
+```
+
+```python
+for angka in range(1, 6):
+    if angka == 3:
+        pass
+
+    print("Pass:", angka)
+```
+
+> Penjelasan: Pada contoh `continue`, angka 3 dilewati. Pada contoh `break`, perulangan berhenti saat angka 3. Pada contoh `pass`, tidak ada efek khusus sehingga semua angka tetap ditampilkan.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nilai` dengan angka bebas.
+- Gunakan `if`, `elif`, dan `else` untuk menentukan grade nilai.
+- Buat `for loop` untuk menampilkan angka 1 sampai 10.
+- Gunakan `continue` untuk melewati angka 5.
+- Gunakan `break` untuk menghentikan perulangan saat angka lebih besar dari 8.
+- Buat contoh `while loop` yang menampilkan angka 1 sampai 5.
+- Tambahkan contoh `pass` pada salah satu blok kode yang belum ingin diisi.

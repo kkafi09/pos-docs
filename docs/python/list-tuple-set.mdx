@@ -1,0 +1,408 @@
+---
+sidebar_position: 4
+---
+
+# List, Tuple, dan Set
+List, tuple, dan set adalah tipe data yang digunakan untuk menyimpan banyak nilai dalam satu variabel. Ketiganya mirip karena sama-sama bisa menyimpan kumpulan data, tetapi memiliki aturan dan kegunaan yang berbeda.
+
+## List
+List adalah tipe data yang digunakan untuk menyimpan banyak nilai secara berurutan. List ditulis menggunakan tanda kurung siku (`[]`).
+
+### Penulisan List
+List bisa berisi teks, angka, boolean, atau campuran dari beberapa tipe data.
+
+```python
+nama_mahasiswa = ["Budi", "Ani", "Citra"]
+nilai = [80, 90, 75]
+data_campuran = ["Budi", 20, True]
+
+print(nama_mahasiswa)
+print(nilai)
+print(data_campuran)
+```
+
+> Penjelasan: Variabel `nama_mahasiswa`, `nilai`, dan `data_campuran` semuanya adalah list. List bisa menyimpan beberapa data sekaligus dalam satu variabel.
+
+List juga bisa diakses menggunakan index. Sama seperti string, index pada list dimulai dari angka `0`.
+
+```python
+nama_mahasiswa = ["Budi", "Ani", "Citra"]
+
+print(nama_mahasiswa[0])
+print(nama_mahasiswa[1])
+print(nama_mahasiswa[-1])
+```
+
+> Penjelasan: `nama_mahasiswa[0]` mengambil data pertama, sedangkan `nama_mahasiswa[-1]` mengambil data terakhir.
+
+### Alternatif Membuat List dengan Range
+Kita bisa membuat list angka menggunakan `range()` lalu mengubahnya menjadi list dengan fungsi `list()`.
+
+```python
+angka = list(range(1, 6))
+
+print(angka)
+```
+
+Output dari program di atas adalah:
+
+```text
+[1, 2, 3, 4, 5]
+```
+
+> Penjelasan: `range(1, 6)` menghasilkan angka dari 1 sampai 5. Karena `range()` belum berbentuk list, kita ubah menggunakan `list()`.
+
+Kita juga bisa menentukan jarak antar angka.
+
+```python
+angka_genap = list(range(2, 11, 2))
+
+print(angka_genap)
+```
+
+> Penjelasan: `range(2, 11, 2)` dimulai dari 2, berhenti sebelum 11, dan naik sebanyak 2 setiap langkah.
+
+### Membuat List dari For Loop
+List bisa dibuat dari hasil perulangan `for`. Cara ini berguna ketika isi list berasal dari proses tertentu.
+
+```python
+kuadrat = []
+
+for angka in range(1, 6):
+    kuadrat.append(angka ** 2)
+
+print(kuadrat)
+```
+
+> Penjelasan: Awalnya `kuadrat` adalah list kosong. Setiap perulangan, hasil `angka ** 2` ditambahkan ke dalam list menggunakan `.append()`.
+
+Python juga menyediakan cara yang lebih singkat, yaitu list comprehension.
+
+```python
+kuadrat = [angka ** 2 for angka in range(1, 6)]
+
+print(kuadrat)
+```
+
+> Penjelasan: Kode di atas menghasilkan list yang sama, tetapi ditulis lebih ringkas.
+
+### Membuat List dengan For If
+Kita juga bisa menambahkan kondisi `if` saat membuat list. Cara ini digunakan ketika hanya data tertentu yang ingin dimasukkan.
+
+```python
+angka_genap = []
+
+for angka in range(1, 11):
+    if angka % 2 == 0:
+        angka_genap.append(angka)
+
+print(angka_genap)
+```
+
+> Penjelasan: Angka hanya dimasukkan ke list jika `angka % 2 == 0`, yaitu jika angka tersebut habis dibagi 2.
+
+Dengan list comprehension, kode tersebut bisa ditulis lebih singkat.
+
+```python
+angka_genap = [angka for angka in range(1, 11) if angka % 2 == 0]
+
+print(angka_genap)
+```
+
+### Manipulasi List
+List bersifat mutable, artinya isi list bisa diubah setelah dibuat. Kita bisa menambah, mengubah, dan menghapus data dari list.
+
+```python
+materi = ["Python", "Git", "R"]
+
+materi.append("Data Analysis")
+print(materi)
+
+materi[1] = "GitHub"
+print(materi)
+
+materi.remove("R")
+print(materi)
+```
+
+Beberapa method list yang sering digunakan:
+
+- `.append()` untuk menambah data ke akhir list.
+- `.insert()` untuk menambah data pada index tertentu.
+- `.remove()` untuk menghapus data berdasarkan nilainya.
+- `.pop()` untuk menghapus data berdasarkan index.
+- `.sort()` untuk mengurutkan list.
+- `.reverse()` untuk membalik urutan list.
+
+Contoh penggunaan `.insert()` dan `.pop()`:
+
+```python
+materi = ["Python", "R"]
+
+materi.insert(1, "Git")
+print(materi)
+
+materi.pop(0)
+print(materi)
+```
+
+> Penjelasan: `.insert(1, "Git")` menambahkan `"Git"` pada index 1. `.pop(0)` menghapus data pada index 0.
+
+### Operasi List
+List bisa digabung, diulang, dicek panjangnya, dan dicek apakah suatu data ada di dalam list.
+
+```python
+materi_python = ["Dasar Python", "String"]
+materi_lanjutan = ["List", "Dictionary"]
+
+semua_materi = materi_python + materi_lanjutan
+
+print(semua_materi)
+print(materi_python * 2)
+print(len(semua_materi))
+print("String" in semua_materi)
+```
+
+> Penjelasan: Operator `+` digunakan untuk menggabungkan list, sedangkan `*` digunakan untuk mengulang isi list. Fungsi `len()` menghitung jumlah data di dalam list.
+
+Kita juga bisa mengambil sebagian isi list menggunakan slicing.
+
+```python
+materi = ["Dasar Python", "String", "Percabangan", "List"]
+
+print(materi[0:2])
+print(materi[2:])
+print(materi[:3])
+```
+
+### Menduplikat List
+Saat menduplikat list, kita perlu berhati-hati. Jika menggunakan `=`, Python tidak membuat list baru, tetapi hanya membuat nama variabel baru yang mengarah ke list yang sama.
+
+```python
+nilai_asli = [80, 90, 75]
+nilai_duplikat = nilai_asli
+
+nilai_duplikat[0] = 100
+
+print(nilai_asli)
+print(nilai_duplikat)
+```
+
+> Penjelasan: Perubahan pada `nilai_duplikat` ikut mengubah `nilai_asli` karena keduanya mengarah ke list yang sama.
+
+Untuk membuat salinan list yang benar-benar baru, gunakan `.copy()` atau slicing.
+
+```python
+nilai_asli = [80, 90, 75]
+nilai_duplikat = nilai_asli.copy()
+
+nilai_duplikat[0] = 100
+
+print(nilai_asli)
+print(nilai_duplikat)
+```
+
+> Penjelasan: Dengan `.copy()`, perubahan pada list duplikat tidak mengubah list asli.
+
+### Nested List atau List Bersarang
+Nested list adalah list yang memiliki list lain di dalamnya. Bentuk ini sering digunakan untuk menyimpan data seperti tabel sederhana.
+
+```python
+data_mahasiswa = [
+    ["Budi", 80],
+    ["Ani", 90],
+    ["Citra", 75],
+]
+
+print(data_mahasiswa)
+print(data_mahasiswa[0])
+print(data_mahasiswa[0][1])
+```
+
+> Penjelasan: `data_mahasiswa[0]` mengambil baris pertama, sedangkan `data_mahasiswa[0][1]` mengambil nilai dari baris pertama kolom kedua.
+
+Kita juga bisa melakukan looping pada nested list.
+
+```python
+data_mahasiswa = [
+    ["Budi", 80],
+    ["Ani", 90],
+    ["Citra", 75],
+]
+
+for mahasiswa in data_mahasiswa:
+    print(mahasiswa[0], mahasiswa[1])
+```
+
+### Deep Copy Nested List
+Untuk nested list, `.copy()` hanya menyalin list bagian luar. List yang ada di dalamnya masih bisa saling terhubung. Kondisi ini disebut shallow copy.
+
+```python
+data_asli = [["Budi", 80], ["Ani", 90]]
+data_duplikat = data_asli.copy()
+
+data_duplikat[0][1] = 100
+
+print(data_asli)
+print(data_duplikat)
+```
+
+> Penjelasan: Nilai pada `data_asli` ikut berubah karena list bagian dalam masih digunakan bersama oleh kedua variabel.
+
+Untuk menyalin nested list secara aman, gunakan `deepcopy()` dari module `copy`.
+
+```python
+from copy import deepcopy
+
+data_asli = [["Budi", 80], ["Ani", 90]]
+data_duplikat = deepcopy(data_asli)
+
+data_duplikat[0][1] = 100
+
+print(data_asli)
+print(data_duplikat)
+```
+
+> Penjelasan: `deepcopy()` menyalin list bagian luar dan list bagian dalam. Karena itu, perubahan pada `data_duplikat` tidak memengaruhi `data_asli`.
+
+### Looping List dan Enumerate
+List sering digunakan bersama perulangan. Ada beberapa cara untuk melakukan looping pada list.
+
+#### For Loop
+Cara paling sederhana adalah mengambil isi list satu per satu.
+
+```python
+materi = ["Dasar Python", "String", "Percabangan", "List"]
+
+for item in materi:
+    print(item)
+```
+
+> Penjelasan: Variabel `item` akan berisi setiap elemen dari list `materi` secara bergantian.
+
+#### For Loop dan Range
+Jika kita membutuhkan index dari setiap elemen, kita bisa menggunakan `range()` dan `len()`.
+
+```python
+materi = ["Dasar Python", "String", "Percabangan", "List"]
+
+for index in range(len(materi)):
+    print(index, materi[index])
+```
+
+> Penjelasan: `range(len(materi))` menghasilkan angka index dari 0 sampai panjang list dikurangi 1.
+
+Cara lain yang lebih rapi adalah menggunakan `enumerate()`.
+
+```python
+materi = ["Dasar Python", "String", "Percabangan", "List"]
+
+for index, item in enumerate(materi):
+    print(index, item)
+```
+
+> Penjelasan: `enumerate()` menghasilkan dua nilai sekaligus, yaitu index dan isi dari list. Cara ini biasanya lebih mudah dibaca dibandingkan menggunakan `range(len(...))`.
+
+## Tuple
+Tuple adalah tipe data yang mirip dengan list, tetapi isinya tidak bisa diubah setelah dibuat. Tuple ditulis menggunakan tanda kurung biasa (`()`).
+
+```python
+koordinat = (10, 20)
+hari = ("Senin", "Selasa", "Rabu")
+
+print(koordinat)
+print(hari[0])
+```
+
+> Penjelasan: Tuple cocok digunakan untuk data yang sifatnya tetap, misalnya koordinat, nama hari, atau konfigurasi yang tidak ingin diubah.
+
+Jika mencoba mengubah isi tuple, Python akan menghasilkan error.
+
+```python
+hari = ("Senin", "Selasa", "Rabu")
+
+hari[0] = "Minggu"
+```
+
+> Penjelasan: Tuple bersifat immutable, sehingga data di dalamnya tidak bisa diubah seperti list.
+
+Tuple juga bisa digunakan dalam perulangan.
+
+```python
+hari = ("Senin", "Selasa", "Rabu")
+
+for item in hari:
+    print(item)
+```
+
+## Set
+Set adalah tipe data yang digunakan untuk menyimpan kumpulan data unik. Set ditulis menggunakan kurung kurawal (`{}`).
+
+```python
+angka = {1, 2, 3, 3, 4, 4}
+
+print(angka)
+```
+
+> Penjelasan: Set hanya menyimpan nilai unik. Karena itu, angka yang sama akan otomatis dianggap satu data saja.
+
+Set tidak memiliki urutan index seperti list dan tuple. Artinya, kita tidak bisa mengambil data set menggunakan index.
+
+```python
+materi = {"Python", "Git", "R"}
+
+for item in materi:
+    print(item)
+```
+
+Set sering digunakan untuk operasi himpunan, seperti gabungan, irisan, dan selisih.
+
+```python
+kelas_a = {"Budi", "Ani", "Citra"}
+kelas_b = {"Ani", "Dina", "Eka"}
+
+print(kelas_a | kelas_b)
+print(kelas_a & kelas_b)
+print(kelas_a - kelas_b)
+```
+
+Beberapa operasi set yang sering digunakan:
+
+- `|` untuk gabungan data.
+- `&` untuk irisan data.
+- `-` untuk selisih data.
+
+> Penjelasan: Gabungan mengambil semua data unik, irisan mengambil data yang muncul di kedua set, dan selisih mengambil data yang hanya ada pada set pertama.
+
+## Perbedaan List, Tuple, dan Set
+Perbedaan utama dari list, tuple, dan set ada pada sifat data yang disimpan.
+
+- `list` memiliki urutan, bisa diubah, dan boleh berisi data duplikat.
+- `tuple` memiliki urutan, tidak bisa diubah, dan boleh berisi data duplikat.
+- `set` tidak menggunakan index, bisa diubah, tetapi hanya menyimpan data unik.
+
+```python
+contoh_list = ["Python", "Python", "Git"]
+contoh_tuple = ("Python", "Python", "Git")
+contoh_set = {"Python", "Python", "Git"}
+
+print(contoh_list)
+print(contoh_tuple)
+print(contoh_set)
+```
+
+> Penjelasan: `list` dan `tuple` tetap menyimpan data duplikat, sedangkan `set` hanya menyimpan nilai unik.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat list `nilai` yang berisi minimal 5 angka.
+- Tambahkan satu nilai baru menggunakan `.append()`.
+- Buat list baru yang berisi nilai di atas 75 menggunakan `for` dan `if`.
+- Tampilkan isi list menggunakan `for loop`.
+- Tampilkan index dan isi list menggunakan `enumerate()`.
+- Buat nested list berisi nama mahasiswa dan nilai.
+- Duplikat nested list menggunakan `deepcopy()`, lalu ubah salah satu nilainya.
+- Buat tuple berisi nama hari.
+- Buat set berisi nama mata kuliah, lalu coba masukkan data yang sama lebih dari satu kali.
