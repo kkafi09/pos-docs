@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+sidebar_label: String
+title: String
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 # String
@@ -56,7 +60,7 @@ Beberapa escape character yang sering digunakan:
 ## Operasi dan Manipulasi String
 String bisa digabung, diambil bagian tertentunya, diulang, dan diubah bentuk penulisannya. Operasi ini sering digunakan saat membersihkan data teks atau membuat output program menjadi lebih rapi.
 
-### String Concatenate
+### Menggabungkan String
 Concatenate adalah proses menggabungkan dua string atau lebih. Di Python, kita bisa menggunakan operator `+`.
 
 ```python
@@ -81,7 +85,7 @@ kalimat = nama + " berumur " + str(umur) + " tahun"
 print(kalimat)
 ```
 
-### String Built-in Function
+### Fungsi Bawaan String
 Python memiliki banyak fungsi bawaan untuk membantu memanipulasi string.
 
 ```python
@@ -103,7 +107,7 @@ Beberapa built-in function dan method yang sering digunakan:
 
 > Penjelasan: `len()` adalah fungsi bawaan Python, sedangkan `.upper()`, `.lower()`, dan method lainnya dipanggil dari nilai string.
 
-### Operator dan Manipulasi String
+### Indexing, Slicing, dan Method String
 String dapat diakses menggunakan index. Index di Python dimulai dari angka `0`.
 
 ```python
@@ -175,7 +179,7 @@ print("Python".center(10, "-"))
 
 > Penjelasan: `.strip()` menghapus spasi di awal dan akhir string. `.ljust()`, `.rjust()`, dan `.center()` membantu membuat teks lebih rapi saat ditampilkan.
 
-### Format String
+### Format String dengan F-String
 Format string digunakan untuk memasukkan nilai variabel ke dalam teks. Cara yang paling sering digunakan di Python modern adalah f-string.
 
 ```python
@@ -231,7 +235,7 @@ print(f"Heksadesimal: {angka:x}")
 
 > Penjelasan: Format angka membantu membuat output lebih sesuai kebutuhan, terutama ketika data akan dibaca oleh pengguna.
 
-### String Width and Alignment
+### Lebar dan Alignment String
 Width and alignment digunakan untuk mengatur lebar tampilan string. Ini berguna ketika kita ingin membuat output berbentuk tabel sederhana di terminal.
 
 ```python

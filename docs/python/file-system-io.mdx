@@ -1,5 +1,9 @@
 ---
 sidebar_position: 8
+sidebar_label: File I/O
+title: File System I/O
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 # File System I/O
@@ -7,7 +11,7 @@ File system I/O adalah proses membaca data dari file dan menulis data ke file. D
 
 I/O adalah singkatan dari Input dan Output. Input berarti program membaca data, sedangkan output berarti program menyimpan atau menampilkan hasil.
 
-## Mengenal Path File
+## Path File
 Sebelum membaca atau menulis file, kita perlu mengetahui lokasi file tersebut. Lokasi file disebut path.
 
 ```python
@@ -72,7 +76,7 @@ with open("data.txt", "r") as file:
         print(baris.strip())
 ```
 
-## Membaca TXT Berisi Angka
+## Membaca Angka dari TXT
 Jika file `.txt` berisi angka, data yang dibaca tetap berbentuk string. Agar bisa dihitung, data perlu diubah menjadi `int` atau `float`.
 
 Misalnya file `nilai.txt` berisi:
@@ -122,7 +126,7 @@ with open("hasil.txt", "w") as file:
 
 > Penjelasan: `\n` digunakan untuk membuat baris baru pada file teks.
 
-## Menambahkan Isi ke File TXT
+## Append ke File TXT
 Jika ingin menambahkan isi tanpa menghapus isi lama, gunakan mode `"a"`.
 
 ```python
@@ -267,7 +271,7 @@ print(rata_rata)
 
 > Penjelasan: `.mean()` digunakan untuk menghitung rata-rata pada kolom numerik.
 
-## Menulis Output Excel
+## Menulis File Excel
 Data hasil pengolahan bisa disimpan kembali ke file Excel menggunakan `.to_excel()`.
 
 ```python
@@ -300,7 +304,7 @@ data.to_excel("hasil_nilai.xlsx", index=False)
 
 > Penjelasan: Kolom `status` dibuat berdasarkan nilai. Jika nilai lebih besar atau sama dengan 75, statusnya `"Lulus"`.
 
-## Membaca Excel untuk Data X1 sampai X5
+## Mengolah Kolom X1 sampai X5 dari Excel
 Dalam soal pengolahan data, file Excel sering berisi kolom seperti `x1`, `x2`, `x3`, `x4`, dan `x5`. Kita bisa membaca kolom tersebut, lalu menghitung rata-rata dan range.
 
 ```python
@@ -346,7 +350,7 @@ data.to_excel("hasil_pengukuran.xlsx", index=False)
 
 > Penjelasan: Data dibaca dari Excel, dihitung kolom tambahannya, lalu disimpan kembali ke file Excel baru.
 
-## Menulis Output TXT dari Data
+## Menulis Data ke TXT
 Selain Excel, hasil pengolahan juga bisa disimpan ke file `.txt`.
 
 ```python

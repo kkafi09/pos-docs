@@ -1,5 +1,9 @@
 ---
 sidebar_position: 7
+sidebar_label: NumPy
+title: Library NumPy
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 # Library NumPy
@@ -37,7 +41,7 @@ print(np.mean(nilai))
 
 > Penjelasan: `np.mean()` digunakan untuk menghitung rata-rata. Dengan NumPy, kita tidak perlu membuat perulangan manual untuk menjumlahkan semua data.
 
-## Instalasi dan Import NumPy
+## Instalasi dan Import
 Sebelum digunakan, NumPy perlu di-install terlebih dahulu.
 
 ```bash
@@ -166,7 +170,7 @@ print(a * b)
 
 > Penjelasan: Operasi antar array dilakukan berdasarkan posisi elemen yang sama.
 
-## Rata-rata, Nilai Minimum, dan Maksimum
+## Statistik Dasar
 NumPy menyediakan fungsi statistik dasar seperti rata-rata, nilai minimum, dan nilai maksimum.
 
 ```python
@@ -189,7 +193,7 @@ Beberapa fungsi yang sering digunakan:
 
 > Penjelasan: Fungsi-fungsi tersebut membantu kita mengolah data numerik tanpa menulis perulangan manual.
 
-## Menghitung Xbar
+## Menghitung Xbar per Baris
 Dalam beberapa soal pengolahan data, kita diminta menghitung nilai rata-rata dari beberapa kolom, misalnya `x1` sampai `x5`. Nilai rata-rata ini sering disebut `xbar`.
 
 ```python
@@ -218,7 +222,7 @@ print(rata_rata_kolom)
 
 > Penjelasan: `axis=0` berarti perhitungan dilakukan per kolom.
 
-## Menghitung Range
+## Menghitung Range per Baris
 Range dalam konteks data numerik adalah selisih antara nilai terbesar dan nilai terkecil. Jika data memiliki kolom `x1` sampai `x5`, range bisa dihitung per baris.
 
 ```python
@@ -321,7 +325,7 @@ print(hasil)
 
 Pada contoh di atas, `status` tidak ikut digabung karena berisi teks. Untuk data campuran angka dan teks, biasanya kita menggunakan pandas. Namun untuk fokus NumPy, bagian utama yang dipelajari adalah perhitungan numeriknya.
 
-## Membaca Data CSV dengan NumPy
+## Membaca CSV dengan NumPy
 NumPy bisa membaca file berbentuk teks atau CSV menggunakan `np.loadtxt()` atau `np.genfromtxt()`.
 
 Misalnya kita memiliki file `data.csv` seperti berikut:
@@ -354,7 +358,7 @@ print(data)
 
 Untuk file Excel seperti `.xls` atau `.xlsx`, NumPy bukan pilihan utama. Biasanya file Excel dibaca menggunakan pandas, lalu datanya bisa diubah menjadi array NumPy jika dibutuhkan.
 
-## Menyimpan Data dengan NumPy
+## Menyimpan CSV dengan NumPy
 Array NumPy bisa disimpan ke file CSV menggunakan `np.savetxt()`.
 
 ```python

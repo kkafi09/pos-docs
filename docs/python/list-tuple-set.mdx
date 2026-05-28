@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+sidebar_label: "List, Tuple & Set"
+title: List, Tuple, dan Set
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 # List, Tuple, dan Set
@@ -35,7 +39,7 @@ print(nama_mahasiswa[-1])
 
 > Penjelasan: `nama_mahasiswa[0]` mengambil data pertama, sedangkan `nama_mahasiswa[-1]` mengambil data terakhir.
 
-### Alternatif Membuat List dengan Range
+### Membuat List dengan Range
 Kita bisa membuat list angka menggunakan `range()` lalu mengubahnya menjadi list dengan fungsi `list()`.
 
 ```python
@@ -86,7 +90,7 @@ print(kuadrat)
 
 > Penjelasan: Kode di atas menghasilkan list yang sama, tetapi ditulis lebih ringkas.
 
-### Membuat List dengan For If
+### Membuat List dengan For dan IF
 Kita juga bisa menambahkan kondisi `if` saat membuat list. Cara ini digunakan ketika hanya data tertentu yang ingin dimasukkan.
 
 ```python
@@ -234,7 +238,7 @@ for mahasiswa in data_mahasiswa:
     print(mahasiswa[0], mahasiswa[1])
 ```
 
-### Deep Copy Nested List
+### Deep Copy pada Nested List
 Untuk nested list, `.copy()` hanya menyalin list bagian luar. List yang ada di dalamnya masih bisa saling terhubung. Kondisi ini disebut shallow copy.
 
 ```python
@@ -268,7 +272,7 @@ print(data_duplikat)
 ### Looping List dan Enumerate
 List sering digunakan bersama perulangan. Ada beberapa cara untuk melakukan looping pada list.
 
-#### For Loop
+### Looping dengan For
 Cara paling sederhana adalah mengambil isi list satu per satu.
 
 ```python
@@ -280,7 +284,7 @@ for item in materi:
 
 > Penjelasan: Variabel `item` akan berisi setiap elemen dari list `materi` secara bergantian.
 
-#### For Loop dan Range
+### Looping dengan Range
 Jika kita membutuhkan index dari setiap elemen, kita bisa menggunakan `range()` dan `len()`.
 
 ```python

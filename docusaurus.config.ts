@@ -2,7 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const repository = process.env.GITHUB_REPOSITORY ?? 'username/pos-docs';
+const repository = process.env.GITHUB_REPOSITORY ?? 'kkafi09/pos-docs';
 const [organizationName, projectName = 'pos-docs'] = repository.split('/');
 const isUserOrOrgPage =
   projectName.toLowerCase() === `${organizationName}.github.io`.toLowerCase();
