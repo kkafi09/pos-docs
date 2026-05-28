@@ -1,0 +1,38 @@
+---
+sidebar_position: 2
+---
+
+# Data Frame dan Visualisasi
+
+Data frame adalah struktur utama untuk data tabular di R. Materi ini mengenalkan
+pembuatan data frame, ringkasan data, dan visualisasi sederhana.
+
+## Membuat Data Frame
+
+```r
+mahasiswa <- data.frame(
+  nama = c("Alya", "Bima", "Citra"),
+  kelas = c("A", "A", "B"),
+  nilai = c(88, 76, 91)
+)
+
+summary(mahasiswa)
+```
+
+## Visualisasi Dasar
+
+```r
+barplot(
+  mahasiswa$nilai,
+  names.arg = mahasiswa$nama,
+  main = "Nilai Praktikum",
+  xlab = "Mahasiswa",
+  ylab = "Nilai"
+)
+```
+
+## Latihan
+
+Gunakan dataset kecil berisi minimal lima baris. Tampilkan ringkasan data dan
+buat satu visualisasi yang menjawab pertanyaan sederhana, misalnya "kelas mana
+yang memiliki rata-rata nilai tertinggi?".

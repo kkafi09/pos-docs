@@ -1,0 +1,40 @@
+---
+sidebar_position: 2
+---
+
+# Data Analysis dengan Python
+
+Materi ini mengenalkan `pandas` untuk data tabular dan `matplotlib` untuk
+visualisasi awal.
+
+## Membuat DataFrame
+
+```python
+import pandas as pd
+
+mahasiswa = pd.DataFrame({
+    "nama": ["Alya", "Bima", "Citra"],
+    "kelas": ["A", "A", "B"],
+    "nilai": [88, 76, 91],
+})
+
+print(mahasiswa.describe())
+```
+
+## Visualisasi Sederhana
+
+```python
+import matplotlib.pyplot as plt
+
+mahasiswa.plot(kind="bar", x="nama", y="nilai", legend=False)
+plt.title("Nilai Praktikum")
+plt.xlabel("Mahasiswa")
+plt.ylabel("Nilai")
+plt.tight_layout()
+plt.show()
+```
+
+## Latihan
+
+Ambil dataset kecil, baca dengan `pandas`, lalu jawab satu pertanyaan analisis.
+Sertakan kode, output ringkasan, dan visualisasi.

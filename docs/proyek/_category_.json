@@ -1,0 +1,8 @@
+{
+  "label": "Proyek Mini",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Panduan proyek akhir kecil untuk menggabungkan Git, R, dan Python."
+  }
+}

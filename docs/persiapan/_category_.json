@@ -1,0 +1,8 @@
+{
+  "label": "Persiapan",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Setup lingkungan, Git, dan pola kerja praktikum."
+  }
+}

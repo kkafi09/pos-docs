@@ -1,0 +1,33 @@
+.features {
+  padding: 3rem 0;
+  width: 100%;
+}
+
+.feature {
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+}
+
+.feature h3 {
+  margin: 0.9rem 0 0.75rem;
+}
+
+.feature p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.featureAccent {
+  display: inline-flex;
+  width: 2.4rem;
+  height: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  font-weight: 700;
+}
