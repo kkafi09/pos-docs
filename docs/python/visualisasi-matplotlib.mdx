@@ -112,6 +112,45 @@ plt.show()
 
 > Penjelasan: `label` digunakan untuk memberi nama setiap garis. `plt.legend()` menampilkan keterangan garis pada grafik.
 
+## Membuat Grafik Batang
+Selain grafik line, Matplotlib juga bisa membuat grafik batang. Grafik batang cocok digunakan untuk membandingkan nilai antar kategori.
+
+```python
+import matplotlib.pyplot as plt
+
+nama = ["Budi", "Ani", "Citra", "Dina"]
+nilai = [80, 90, 75, 70]
+
+plt.bar(nama, nilai, color="green")
+plt.title("Nilai Mahasiswa")
+plt.xlabel("Nama")
+plt.ylabel("Nilai")
+plt.show()
+```
+
+> Penjelasan: `plt.bar()` digunakan untuk membuat grafik batang. Contoh ini cocok ketika data yang dibandingkan adalah kategori seperti nama mahasiswa.
+
+## Membuat Grafik Kehadiran
+Grafik juga bisa digunakan untuk melihat persentase kehadiran.
+
+```python
+import matplotlib.pyplot as plt
+
+nama = ["Budi", "Ani", "Citra", "Dina"]
+persentase = [85.7, 100, 71.4, 92.8]
+
+plt.plot(nama, persentase, marker="o")
+plt.axhline(y=75, linestyle="--", color="red", label="Batas minimum")
+
+plt.title("Persentase Kehadiran")
+plt.xlabel("Nama")
+plt.ylabel("Persentase")
+plt.legend()
+plt.show()
+```
+
+> Penjelasan: `plt.axhline()` membuat garis horizontal. Pada contoh ini, garis tersebut digunakan sebagai batas minimal kehadiran.
+
 ## Grafik dari DataFrame
 Jika data sudah diolah menggunakan pandas, kita bisa mengambil kolom DataFrame untuk dibuat grafik.
 

@@ -195,6 +195,55 @@ print(data_lulus)
 
 > Penjelasan: Kode di atas mengambil baris yang nilai pada kolom `nilai` lebih besar atau sama dengan 75.
 
+## Contoh Rekap Nilai Mahasiswa
+Selain data pengukuran, pandas juga bisa digunakan untuk rekap nilai mahasiswa. Misalnya, kita ingin menghitung nilai akhir dari tugas, UTS, dan UAS.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra", "Dina"],
+    "tugas": [80, 90, 75, 70],
+    "uts": [78, 88, 80, 72],
+    "uas": [85, 92, 70, 75],
+})
+
+data["nilai_akhir"] = (data["tugas"] * 0.3) + (data["uts"] * 0.3) + (data["uas"] * 0.4)
+data["status"] = data["nilai_akhir"].apply(lambda nilai: "Lulus" if nilai >= 75 else "Belum lulus")
+
+print(data)
+```
+
+> Penjelasan: Nilai akhir dihitung dari bobot tugas, UTS, dan UAS. Setelah itu, kolom `status` dibuat berdasarkan nilai akhir.
+
+Kita juga bisa mengambil mahasiswa yang lulus saja.
+
+```python
+mahasiswa_lulus = data[data["status"] == "Lulus"]
+
+print(mahasiswa_lulus)
+```
+
+## Contoh Rekap Kehadiran
+Pandas juga cocok untuk data kehadiran. Misalnya, kita ingin mengecek apakah persentase kehadiran mahasiswa sudah memenuhi batas minimal.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "nama": ["Budi", "Ani", "Citra", "Dina"],
+    "hadir": [12, 14, 10, 13],
+    "total_pertemuan": [14, 14, 14, 14],
+})
+
+data["persentase"] = (data["hadir"] / data["total_pertemuan"]) * 100
+data["status"] = data["persentase"].apply(lambda nilai: "Memenuhi" if nilai >= 75 else "Tidak memenuhi")
+
+print(data)
+```
+
+> Penjelasan: Contoh ini berbeda dari data `x1` sampai `x5`, tetapi alurnya sama: ambil data tabel, hitung kolom baru, lalu tentukan status.
+
 ## Menghitung Xbar dan R
 Jika data memiliki kolom `x1` sampai `x5`, kita bisa menghitung rata-rata baris dan range baris dengan pandas.
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 11
-sidebar_label: Multi-format I/O
+sidebar_label: Panduan Format File
 title: Membaca dan Menulis Multi-format
 toc_min_heading_level: 2
 toc_max_heading_level: 3
@@ -169,6 +169,26 @@ data.to_excel("hasil_pengukuran.xlsx", index=False)
 ```
 
 > Penjelasan: Pandas membuat alur baca data, olah kolom, dan simpan output menjadi lebih singkat.
+
+## Contoh Alur Rekap Nilai
+Contoh berikut menunjukkan alur lain yang lebih umum: membaca nilai mahasiswa dari CSV, menghitung nilai akhir, lalu menyimpan output ke Excel dan TXT.
+
+```python
+import pandas as pd
+
+data = pd.read_csv("nilai_mahasiswa.csv")
+
+data["nilai_akhir"] = (data["tugas"] * 0.3) + (data["uts"] * 0.3) + (data["uas"] * 0.4)
+data["status"] = data["nilai_akhir"].apply(lambda nilai: "Lulus" if nilai >= 75 else "Belum lulus")
+
+data.to_excel("hasil_nilai.xlsx", index=False)
+
+with open("ringkasan_nilai.txt", "w") as file:
+    file.write(f"Jumlah mahasiswa: {len(data)}\n")
+    file.write(f"Rata-rata nilai akhir: {data['nilai_akhir'].mean()}\n")
+```
+
+> Penjelasan: Input berupa CSV, proses dilakukan dengan pandas, output disimpan ke Excel dan TXT. Pola seperti ini sering muncul pada pekerjaan pengolahan data praktikum.
 
 ## Menyimpan ke Beberapa Format
 Kadang hasil pengolahan perlu disimpan ke lebih dari satu format.

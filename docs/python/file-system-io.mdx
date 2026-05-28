@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 6
 sidebar_label: File I/O
 title: File System I/O
 toc_min_heading_level: 2
@@ -214,6 +214,8 @@ with open("hasil.csv", "w", newline="") as file:
 ## Membaca Excel
 Untuk membaca file Excel seperti `.xlsx`, kita bisa menggunakan library `pandas`. Library ini umum digunakan untuk membaca dan menulis data tabel.
 
+Pada bab ini, pandas dipakai secukupnya untuk kebutuhan file Excel. Cara kerja DataFrame dan pengolahan tabel akan dibahas lebih lengkap pada bab Pandas.
+
 Install library yang dibutuhkan:
 
 ```bash
@@ -367,6 +369,38 @@ with open("laporan_nilai.txt", "w") as file:
 ```
 
 > Penjelasan: `.iterrows()` digunakan untuk membaca DataFrame baris demi baris, lalu setiap baris ditulis ke file `.txt`.
+
+## Contoh Rekap Nilai Sederhana
+Selain data pengukuran, File I/O juga bisa digunakan untuk membuat rekap nilai mahasiswa. Misalnya kita memiliki file `nilai.txt` berisi nilai berikut:
+
+```text
+80
+90
+75
+60
+85
+```
+
+Kita bisa membaca file tersebut, menghitung rata-rata, lalu menyimpan ringkasannya.
+
+```python
+nilai = []
+
+with open("nilai.txt", "r") as file:
+    for baris in file:
+        nilai.append(float(baris.strip()))
+
+rata_rata = sum(nilai) / len(nilai)
+nilai_tertinggi = max(nilai)
+nilai_terendah = min(nilai)
+
+with open("rekap_nilai.txt", "w") as file:
+    file.write(f"Rata-rata: {rata_rata}\n")
+    file.write(f"Nilai tertinggi: {nilai_tertinggi}\n")
+    file.write(f"Nilai terendah: {nilai_terendah}\n")
+```
+
+> Penjelasan: Contoh ini menunjukkan alur sederhana: baca file, olah data, lalu simpan hasil ke file baru.
 
 ## Mode File
 Saat menggunakan `open()`, ada beberapa mode file yang sering digunakan.
