@@ -3,41 +3,43 @@ sidebar_position: 1
 ---
 
 # Dasar Python
+Python adalah salah satu bahasa pemrograman yang digunakan untuk scripting, otomasi, data analysis, web, dan machine learning. Pada praktikum ini, fokus awalnya adalah sintaks dasar dan cara menulis kode yang mudah dibaca.
 
-Python digunakan untuk scripting, otomasi, data analysis, web, dan machine
-learning. Pada praktikum ini, fokus awalnya adalah sintaks dasar dan cara
-menulis kode yang mudah dibaca.
-
-## Variabel dan List
+## Hello World
+Langkah pertama dalam mempelajari suatu bahasa pemrograman adalah memahami bagaimana cara menampilkan informasi ke layar (output). Di Python, kita bisa menggunakan fungsi bawaan `print()`.
 
 ```python
+print("Hello World")
+```
+
+## Mengenal Variabel
+Section sebelumnya, kita langsung menuliskan "Hello World" di dalam fungsi `print()`. Namun bagaimana jika kita ingin menyimpan data tersebut kedalam suatu tempat sehingga kita bisa menggunakannya di tempat lain? di sinilah kita perlu yang namanya variable.
+
+```python
+# membuat variabel bernama 'mata_kuliah' yang berisi teks
 mata_kuliah = "Pemrograman Open Source"
-nilai = [80, 88, 92, 75]
 
-rata_rata = sum(nilai) / len(nilai)
-print(rata_rata)
+# menampilkan isi dari variabel
+print(mata_kuliah)
 ```
+> Penjelasan: Variabel seperti sebuah kotak penyimpanan. Di atas, kita membuat kotak bernama mata_kuliah dan mengisinya dengan teks. Saat kita panggil print(mata_kuliah), Python tidak akan mencetak kata "mata_kuliah", melainkan isi di dalam kotak tersebut.
 
-## Percabangan
+### Aturan penamaan variable
+Memberikan nama pada suatu variabel dalam python memiliki beberapa ketentuan :
+- Variabel tidak boleh dimulai dengan angka, tetapi bisa diakhir dengan angka `100ribu` -> `seratus_ribu`, `ribu_100`
+- Variabel tidak boleh mempunya whitespace, dash (-) ataupun spesial karakter lainnya, tetapi bisa menggunakan `_` sebagai pemisah antar kata `rumah-a` -> `rumah_a`
+- Variabel tidak boleh menggunakan syntax yang ada di python. Hal tersebut jika tetap dilakukan akan membuat behavior dari python akan rusak `if = 1`, `for = 2`
+- Variabel didalam python bersifat case sensitif. variabel `nama` dengan `Nama` dalam python dianggap berbeda
 
-```python
-skor = 88
+###
 
-if skor >= 80:
-    print("Lulus sangat baik")
-elif skor >= 60:
-    print("Lulus")
-else:
-    print("Perlu remedial")
-```
+## Tipe Data
 
-## Latihan
+### Casting Tipe Data
 
-1. Buat list nilai praktikum.
-2. Hitung rata-rata nilai.
-3. Tampilkan status berdasarkan rata-rata tersebut.
+## Operator
 
-## Catatan Asdos
+### Operasi Aritmatika
+### Operasi Komparasi
+### Operasi Logika atau Boolean
 
-Python sensitif terhadap indentasi. Saat mendampingi mahasiswa, cek indentasi
-lebih dulu sebelum membahas error yang lebih kompleks.
