@@ -31,15 +31,214 @@ Memberikan nama pada suatu variabel dalam python memiliki beberapa ketentuan :
 - Variabel tidak boleh menggunakan syntax yang ada di python. Hal tersebut jika tetap dilakukan akan membuat behavior dari python akan rusak `if = 1`, `for = 2`
 - Variabel didalam python bersifat case sensitif. variabel `nama` dengan `Nama` dalam python dianggap berbeda
 
-###
+```python
+nama_mahasiswa = "Budi"
+Nama_mahasiswa = "Ani"
+
+print(nama_mahasiswa)
+print(Nama_mahasiswa)
+```
+
+> Penjelasan: Dua variabel di atas dianggap berbeda karena huruf besar dan huruf kecil dibaca sebagai nama yang berbeda oleh Python.
 
 ## Tipe Data
+Tipe data adalah jenis nilai yang disimpan di dalam variabel. Dengan memahami tipe data, kita bisa menentukan operasi apa saja yang dapat dilakukan pada nilai tersebut.
+
+Beberapa tipe data dasar yang sering digunakan di Python:
+
+- `str` untuk teks atau kumpulan karakter.
+- `int` untuk bilangan bulat.
+- `float` untuk bilangan desimal.
+- `bool` untuk nilai benar atau salah.
+- `list` untuk menyimpan banyak data dalam satu variabel.
+
+```python
+nama = "Budi"
+umur = 20
+ipk = 3.75
+lulus = True
+mata_kuliah = ["Python", "Git", "R"]
+
+print(nama)
+print(umur)
+print(ipk)
+print(lulus)
+print(mata_kuliah)
+```
+
+> Penjelasan: Setiap variabel menyimpan nilai dengan tipe yang berbeda. `nama` berisi teks, `umur` berisi bilangan bulat, `ipk` berisi bilangan desimal, `lulus` berisi boolean, dan `mata_kuliah` berisi beberapa data sekaligus.
+
+Untuk mengecek tipe data dari suatu variabel, kita bisa menggunakan fungsi `type()`.
+
+```python
+nama = "Budi"
+umur = 20
+
+print(type(nama))
+print(type(umur))
+```
+
+Output yang muncul akan menunjukkan tipe data dari masing-masing variabel.
 
 ### Casting Tipe Data
+Casting adalah proses mengubah suatu nilai dari satu tipe data ke tipe data lain. Hal ini sering digunakan ketika data yang kita terima belum sesuai dengan kebutuhan program.
+
+Misalnya, input dari pengguna biasanya dibaca sebagai teks (`str`). Jika ingin digunakan untuk perhitungan, nilai tersebut perlu diubah terlebih dahulu menjadi angka.
+
+```python
+umur = "20"
+
+umur_angka = int(umur)
+
+print(umur_angka + 5)
+```
+
+> Penjelasan: Variabel `umur` awalnya berisi teks `"20"`. Setelah diubah menggunakan `int()`, nilainya bisa dipakai untuk operasi matematika.
+
+Beberapa fungsi casting yang umum digunakan:
+
+- `int()` untuk mengubah nilai menjadi bilangan bulat.
+- `float()` untuk mengubah nilai menjadi bilangan desimal.
+- `str()` untuk mengubah nilai menjadi teks.
+- `bool()` untuk mengubah nilai menjadi boolean.
+
+```python
+angka_bulat = int("10")
+angka_desimal = float("3.14")
+teks = str(100)
+status = bool(1)
+
+print(angka_bulat)
+print(angka_desimal)
+print(teks)
+print(status)
+```
+
+Perlu diperhatikan bahwa tidak semua nilai bisa langsung diubah. Contohnya, teks `"dua puluh"` tidak bisa diubah menjadi `int` karena Python tidak mengenal teks tersebut sebagai angka.
 
 ## Operator
+Operator adalah simbol yang digunakan untuk melakukan operasi terhadap suatu nilai atau variabel. Dalam Python, operator bisa digunakan untuk menghitung angka, membandingkan nilai, atau menggabungkan beberapa kondisi.
 
 ### Operasi Aritmatika
-### Operasi Komparasi
-### Operasi Logika atau Boolean
+Operasi aritmatika digunakan untuk perhitungan matematika dasar.
 
+```python
+a = 10
+b = 3
+
+print(a + b)  # penjumlahan
+print(a - b)  # pengurangan
+print(a * b)  # perkalian
+print(a / b)  # pembagian
+print(a // b) # pembagian bulat
+print(a % b)  # sisa bagi
+print(a ** b) # pangkat
+```
+
+Beberapa operator aritmatika yang sering digunakan:
+
+- `+` untuk penjumlahan.
+- `-` untuk pengurangan.
+- `*` untuk perkalian.
+- `/` untuk pembagian.
+- `//` untuk pembagian bulat.
+- `%` untuk mengambil sisa bagi.
+- `**` untuk perpangkatan.
+
+> Penjelasan: Jika `a = 10` dan `b = 3`, maka `a % b` menghasilkan `1` karena 10 dibagi 3 memiliki sisa 1.
+
+### Operasi Komparasi
+Operasi komparasi digunakan untuk membandingkan dua nilai. Hasil dari operasi komparasi adalah boolean, yaitu `True` atau `False`.
+
+```python
+nilai = 85
+
+print(nilai == 85)
+print(nilai != 75)
+print(nilai > 80)
+print(nilai < 80)
+print(nilai >= 85)
+print(nilai <= 90)
+```
+
+Beberapa operator komparasi yang umum digunakan:
+
+- `==` untuk mengecek apakah dua nilai sama.
+- `!=` untuk mengecek apakah dua nilai tidak sama.
+- `>` untuk mengecek apakah nilai kiri lebih besar.
+- `<` untuk mengecek apakah nilai kiri lebih kecil.
+- `>=` untuk mengecek apakah nilai kiri lebih besar atau sama dengan.
+- `<=` untuk mengecek apakah nilai kiri lebih kecil atau sama dengan.
+
+> Penjelasan: Operator `==` berbeda dengan `=`. Simbol `=` digunakan untuk memberi nilai ke variabel, sedangkan `==` digunakan untuk membandingkan dua nilai.
+
+### Operasi Logika atau Boolean
+Operasi logika digunakan untuk menggabungkan beberapa kondisi. Operator ini sering dipakai saat program perlu mengambil keputusan.
+
+```python
+nilai = 85
+kehadiran = 90
+
+lulus_nilai = nilai >= 75
+lulus_kehadiran = kehadiran >= 80
+
+print(lulus_nilai and lulus_kehadiran)
+print(lulus_nilai or lulus_kehadiran)
+print(not lulus_nilai)
+```
+
+Beberapa operator logika yang sering digunakan:
+
+- `and` menghasilkan `True` jika semua kondisi bernilai `True`.
+- `or` menghasilkan `True` jika minimal salah satu kondisi bernilai `True`.
+- `not` membalik nilai boolean.
+
+Contoh penggunaan dalam kasus sederhana:
+
+```python
+nilai = 85
+kehadiran = 90
+
+if nilai >= 75 and kehadiran >= 80:
+    print("Mahasiswa lulus")
+else:
+    print("Mahasiswa belum lulus")
+```
+
+> Penjelasan: Mahasiswa dinyatakan lulus jika nilai minimal 75 dan kehadiran minimal 80. Karena kedua kondisi terpenuhi, program akan menampilkan "Mahasiswa lulus".
+
+### Operasi Assignment
+Operasi assignment digunakan untuk memberi nilai ke variabel. Operator yang paling sering digunakan adalah `=`.
+
+```python
+jumlah = 10
+
+print(jumlah)
+```
+
+Selain `=`, Python juga memiliki assignment operator yang digabung dengan operasi aritmatika.
+
+```python
+jumlah = 10
+
+jumlah += 5
+print(jumlah)
+
+jumlah -= 2
+print(jumlah)
+
+jumlah *= 3
+print(jumlah)
+```
+
+> Penjelasan: `jumlah += 5` sama seperti menulis `jumlah = jumlah + 5`. Cara ini sering digunakan ketika nilai variabel perlu diperbarui dari nilai sebelumnya.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nama`, `umur`, dan `nilai`.
+- Tampilkan semua variabel menggunakan `print()`.
+- Cek tipe data masing-masing variabel menggunakan `type()`.
+- Buat kondisi sederhana untuk mengecek apakah `nilai` lebih besar atau sama dengan 75.
+- Tampilkan teks `"Lulus"` jika kondisi terpenuhi, dan `"Belum lulus"` jika tidak terpenuhi.

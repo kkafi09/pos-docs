@@ -2,3 +2,270 @@
 sidebar_position: 2
 ---
 
+# String
+String adalah tipe data yang digunakan untuk menyimpan teks. Di Python, string sering dipakai untuk menyimpan nama, kalimat, kode barang, alamat, pesan, dan data lain yang berbentuk karakter.
+
+## Pengenalan String
+String bisa ditulis menggunakan kutip satu (`'`) atau kutip dua (`"`). Keduanya sama-sama valid, yang penting penulisan kutip pembuka dan penutup harus konsisten.
+
+```python
+nama = "Budi"
+mata_kuliah = 'Pemrograman Open Source'
+
+print(nama)
+print(mata_kuliah)
+```
+
+> Penjelasan: Variabel `nama` dan `mata_kuliah` sama-sama menyimpan string. Python tetap membaca keduanya sebagai teks meskipun jenis kutip yang digunakan berbeda.
+
+Jika teks yang ingin ditulis terdiri dari beberapa baris, kita bisa menggunakan triple quote (`"""` atau `'''`).
+
+```python
+deskripsi = """Python adalah bahasa pemrograman
+yang mudah dibaca
+dan cocok untuk pemula."""
+
+print(deskripsi)
+```
+
+> Penjelasan: Triple quote membuat string bisa ditulis dalam beberapa baris tanpa perlu membuat beberapa variabel.
+
+### Penggunaan Escape Character
+Escape character digunakan ketika kita ingin menulis karakter khusus di dalam string. Escape character diawali dengan tanda backslash (`\`).
+
+```python
+kalimat = "Dia berkata, \"Saya sedang belajar Python\""
+lokasi_file = "C:\\Users\\Mahasiswa\\Documents"
+baris_baru = "Baris pertama\nBaris kedua"
+
+print(kalimat)
+print(lokasi_file)
+print(baris_baru)
+```
+
+Beberapa escape character yang sering digunakan:
+
+- `\"` untuk menampilkan kutip dua di dalam string.
+- `\'` untuk menampilkan kutip satu di dalam string.
+- `\\` untuk menampilkan backslash.
+- `\n` untuk membuat baris baru.
+- `\t` untuk membuat tab.
+
+> Penjelasan: Tanpa escape character, Python bisa salah membaca batas awal dan akhir string, terutama ketika di dalam teks terdapat tanda kutip.
+
+## Operasi dan Manipulasi String
+String bisa digabung, diambil bagian tertentunya, diulang, dan diubah bentuk penulisannya. Operasi ini sering digunakan saat membersihkan data teks atau membuat output program menjadi lebih rapi.
+
+### String Concatenate
+Concatenate adalah proses menggabungkan dua string atau lebih. Di Python, kita bisa menggunakan operator `+`.
+
+```python
+nama_depan = "Budi"
+nama_belakang = "Santoso"
+
+nama_lengkap = nama_depan + " " + nama_belakang
+
+print(nama_lengkap)
+```
+
+> Penjelasan: Spasi di antara `nama_depan` dan `nama_belakang` perlu ditulis sendiri, karena Python hanya menggabungkan isi string sesuai yang kita berikan.
+
+String juga bisa digabung dengan nilai lain, tetapi nilai tersebut perlu diubah menjadi string terlebih dahulu.
+
+```python
+nama = "Budi"
+umur = 20
+
+kalimat = nama + " berumur " + str(umur) + " tahun"
+
+print(kalimat)
+```
+
+### String Built-in Function
+Python memiliki banyak fungsi bawaan untuk membantu memanipulasi string.
+
+```python
+teks = "pemrograman open source"
+
+print(len(teks))
+print(teks.upper())
+print(teks.title())
+print(teks.capitalize())
+```
+
+Beberapa built-in function dan method yang sering digunakan:
+
+- `len()` untuk menghitung jumlah karakter.
+- `.upper()` untuk mengubah semua huruf menjadi huruf besar.
+- `.lower()` untuk mengubah semua huruf menjadi huruf kecil.
+- `.title()` untuk mengubah huruf awal setiap kata menjadi huruf besar.
+- `.capitalize()` untuk mengubah huruf awal kalimat menjadi huruf besar.
+
+> Penjelasan: `len()` adalah fungsi bawaan Python, sedangkan `.upper()`, `.lower()`, dan method lainnya dipanggil dari nilai string.
+
+### Operator dan Manipulasi String
+String dapat diakses menggunakan index. Index di Python dimulai dari angka `0`.
+
+```python
+teks = "Python"
+
+print(teks[0])
+print(teks[1])
+print(teks[-1])
+```
+
+> Penjelasan: `teks[0]` mengambil karakter pertama, sedangkan `teks[-1]` mengambil karakter terakhir.
+
+Kita juga bisa mengambil sebagian string menggunakan slicing.
+
+```python
+teks = "Pemrograman"
+
+print(teks[0:5])
+print(teks[5:])
+print(teks[:5])
+```
+
+Selain mengambil karakter, string juga bisa diulang menggunakan operator `*`.
+
+```python
+garis = "-" * 15
+
+print(garis)
+```
+
+Python juga bisa membandingkan string berdasarkan urutan karakter. Perbandingan ini mengikuti nilai karakter, sehingga huruf besar dan huruf kecil bisa menghasilkan urutan yang berbeda.
+
+```python
+print("a" < "b")
+print("A" < "a")
+```
+
+> Penjelasan: Perbandingan string lebih sering digunakan untuk sorting atau pengurutan data teks. Untuk praktikum awal, cukup pahami bahwa Python bisa membandingkan teks seperti membandingkan nilai lain.
+
+Untuk mengecek awalan dan akhiran string, kita bisa menggunakan `.startswith()` dan `.endswith()`.
+
+```python
+nama_file = "laporan_python.pdf"
+
+print(nama_file.startswith("laporan"))
+print(nama_file.endswith(".pdf"))
+```
+
+String juga bisa dipisah menjadi list menggunakan `.split()` dan digabung kembali menggunakan `.join()`.
+
+```python
+kalimat = "Python Git R"
+daftar_materi = kalimat.split(" ")
+
+print(daftar_materi)
+print(", ".join(daftar_materi))
+```
+
+Untuk merapikan spasi atau mengatur posisi teks, kita bisa menggunakan `.strip()`, `.ljust()`, `.rjust()`, dan `.center()`.
+
+```python
+nama = "  Budi  "
+
+print(nama.strip())
+print("Python".ljust(10, "-"))
+print("Python".rjust(10, "-"))
+print("Python".center(10, "-"))
+```
+
+> Penjelasan: `.strip()` menghapus spasi di awal dan akhir string. `.ljust()`, `.rjust()`, dan `.center()` membantu membuat teks lebih rapi saat ditampilkan.
+
+### Format String
+Format string digunakan untuk memasukkan nilai variabel ke dalam teks. Cara yang paling sering digunakan di Python modern adalah f-string.
+
+```python
+nama = "Budi"
+nilai = 85
+
+print(f"Nama: {nama}")
+print(f"Nilai: {nilai}")
+```
+
+> Penjelasan: Dengan f-string, variabel bisa langsung ditulis di dalam `{}` sehingga kode lebih mudah dibaca.
+
+F-string juga bisa digunakan untuk mengatur tampilan angka.
+
+```python
+jumlah_mahasiswa = 1200
+ipk = 3.756
+nomor_urut = 7
+perubahan = 0.125
+
+print(f"Jumlah mahasiswa: {jumlah_mahasiswa:,}")
+print(f"IPK: {ipk:.2f}")
+print(f"Nomor urut: {nomor_urut:03d}")
+print(f"Perubahan: {perubahan:.1%}")
+```
+
+Beberapa format angka yang sering digunakan:
+
+- `:,` untuk memberi pemisah ribuan.
+- `:.2f` untuk menampilkan dua angka di belakang koma.
+- `:03d` untuk menambahkan leading zero sampai tiga digit.
+- `:.1%` untuk menampilkan angka dalam bentuk persentase.
+
+Kita juga bisa menampilkan tanda positif dan negatif di depan angka.
+
+```python
+naik = 10
+turun = -5
+
+print(f"{naik:+d}")
+print(f"{turun:+d}")
+```
+
+Untuk kebutuhan tertentu, angka juga bisa ditampilkan dalam bentuk biner, oktal, atau heksadesimal.
+
+```python
+angka = 15
+
+print(f"Biner: {angka:b}")
+print(f"Oktal: {angka:o}")
+print(f"Heksadesimal: {angka:x}")
+```
+
+> Penjelasan: Format angka membantu membuat output lebih sesuai kebutuhan, terutama ketika data akan dibaca oleh pengguna.
+
+### String Width and Alignment
+Width and alignment digunakan untuk mengatur lebar tampilan string. Ini berguna ketika kita ingin membuat output berbentuk tabel sederhana di terminal.
+
+```python
+nama = "Budi"
+nilai = 85
+
+print(f"|{nama:<10}|{nilai:>5}|")
+print(f"|{'Ani':<10}|{90:>5}|")
+print(f"|{'Citra':<10}|{78:>5}|")
+```
+
+Beberapa simbol alignment yang umum digunakan:
+
+- `<` untuk rata kiri.
+- `>` untuk rata kanan.
+- `^` untuk rata tengah.
+
+Contoh rata tengah:
+
+```python
+judul = "Nilai Praktikum"
+
+print(f"{judul:^30}")
+print("-" * 30)
+```
+
+> Penjelasan: Pada contoh tabel, nama dibuat rata kiri dengan lebar 10 karakter, sedangkan nilai dibuat rata kanan dengan lebar 5 karakter. Cara ini membuat output lebih mudah dibaca.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nama`, `kelas`, dan `nilai`.
+- Gabungkan `nama` dan `kelas` menjadi satu kalimat menggunakan f-string.
+- Tampilkan `nilai` dengan dua angka di belakang koma.
+- Buat garis pemisah menggunakan operator `*`.
+- Tampilkan output dalam format tabel sederhana menggunakan alignment.
