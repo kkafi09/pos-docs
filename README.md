@@ -20,18 +20,8 @@ bun run build
 
 Output statis akan dibuat di folder `build/`.
 
-## Deployment GitHub Pages
+## Penggunaan Internal
 
-Repository ini sudah memiliki workflow GitHub Actions di
-`.github/workflows/deploy.yml`.
-
-Langkah setup di GitHub:
-
-1. Buka repository GitHub.
-2. Masuk ke **Settings > Pages**.
-3. Pada **Build and deployment**, pilih **Source: GitHub Actions**.
-4. Push branch `main`.
-
-Workflow akan menjalankan `bun install`, `bun run build`, lalu mempublish folder
-`build/` ke GitHub Pages. `baseUrl` Docusaurus otomatis mengikuti nama
-repository saat berjalan di GitHub Actions.
+Dokumentasi ini ditujukan untuk kebutuhan internal asisten dosen. Jalankan
+secara lokal saat menyiapkan materi, atau bagikan output `build/` melalui kanal
+internal yang sudah disepakati tim.

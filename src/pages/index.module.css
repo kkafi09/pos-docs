@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(22, 101, 52, 0.1), rgba(37, 99, 235, 0.1)),
+    linear-gradient(135deg, rgba(22, 163, 74, 0.12), rgba(20, 184, 166, 0.1)),
     var(--ifm-background-color);
 }
 
@@ -74,10 +74,16 @@
   width: min(100%, 420px);
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 8px;
-  background: #0f172a;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-  color: #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+  color: #1e293b;
   overflow: hidden;
+}
+
+:global([data-theme='dark']) .codeWindow {
+  background: #0f172a;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  color: #e2e8f0;
 }
 
 .windowBar {
@@ -105,10 +111,12 @@
 .codeWindow pre {
   margin: 0;
   padding: 1.25rem;
+  background: transparent;
   white-space: pre-wrap;
 }
 
 .codeWindow code {
+  color: inherit;
   font-size: 1rem;
   line-height: 1.7;
 }

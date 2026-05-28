@@ -31,12 +31,12 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Siap GitHub Pages',
+    title: 'Siap Dipakai Internal',
     accent: '03',
     description: (
       <>
-        Dokumentasi dapat dibangun otomatis dengan GitHub Actions dan dipublish
-        sebagai situs statis GitHub Pages.
+        Materi tersusun rapi untuk kebutuhan asisten dosen, mudah dibagikan
+        ke tim, dan nyaman dipakai ulang selama praktikum.
       </>
     ),
   },
