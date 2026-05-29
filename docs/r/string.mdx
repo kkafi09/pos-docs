@@ -1,0 +1,105 @@
+---
+sidebar_position: 2
+sidebar_label: String
+title: String di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# String
+String adalah tipe data untuk menyimpan teks. Di R, string biasanya disebut `character` dan ditulis menggunakan tanda kutip satu atau tanda kutip dua.
+
+## Pengenalan String
+
+```r
+nama <- "Budi"
+mata_kuliah <- 'Pemrograman Open Source'
+
+print(nama)
+print(mata_kuliah)
+```
+
+> Penjelasan: Kedua cara penulisan di atas valid. Yang penting, tanda kutip pembuka dan penutup harus sama.
+
+### Penggunaan Escape Character
+Escape character digunakan ketika kita ingin menulis karakter khusus di dalam string.
+
+```r
+teks <- "Dia berkata, \"Saya belajar R\""
+baris_baru <- "Baris pertama\nBaris kedua"
+
+cat(teks)
+cat(baris_baru)
+```
+
+> Penjelasan: `\"` digunakan untuk menampilkan tanda kutip di dalam string, sedangkan `\n` digunakan untuk pindah baris.
+
+## Operasi dan Manipulasi String
+
+### Menggabungkan String
+Untuk menggabungkan string, gunakan `paste()` atau `paste0()`.
+
+```r
+nama <- "Budi"
+kelas <- "A"
+
+print(paste("Nama:", nama, "Kelas:", kelas))
+print(paste0("Nama: ", nama))
+```
+
+> Penjelasan: `paste()` memberi spasi antar bagian secara default, sedangkan `paste0()` menggabungkan teks tanpa spasi otomatis.
+
+### Fungsi Bawaan String
+
+```r
+teks <- "Pemrograman Open Source"
+
+print(nchar(teks))
+print(toupper(teks))
+print(tolower(teks))
+print(substr(teks, 1, 11))
+```
+
+Beberapa fungsi string yang sering digunakan:
+
+- `nchar()` untuk menghitung jumlah karakter.
+- `toupper()` untuk mengubah teks menjadi huruf besar.
+- `tolower()` untuk mengubah teks menjadi huruf kecil.
+- `substr()` untuk mengambil sebagian teks.
+
+### Indexing dan Slicing String
+R tidak mengambil karakter string dengan `[]` seperti vector. Untuk mengambil sebagian teks, gunakan `substr()`.
+
+```r
+kata <- "Python dan R"
+
+print(substr(kata, 1, 6))
+print(substr(kata, 12, 12))
+```
+
+> Penjelasan: Index string di R dimulai dari 1. `substr(kata, 1, 6)` mengambil karakter pertama sampai keenam.
+
+### Format String
+Untuk membuat string dengan nilai variabel, gunakan `sprintf()`.
+
+```r
+nama <- "Budi"
+nilai <- 85
+
+hasil <- sprintf("Nama: %s, Nilai: %d", nama, nilai)
+
+print(hasil)
+```
+
+> Penjelasan: `%s` digunakan untuk teks, sedangkan `%d` digunakan untuk bilangan bulat.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nama` dan `kelas`.
+- Gabungkan keduanya menggunakan `paste()`.
+- Hitung panjang teks menggunakan `nchar()`.
+- Ubah teks menjadi huruf besar dan huruf kecil.
+- Ambil sebagian teks menggunakan `substr()`.
+- Buat format output menggunakan `sprintf()`.

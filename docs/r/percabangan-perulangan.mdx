@@ -1,0 +1,137 @@
+---
+sidebar_position: 3
+sidebar_label: "Percabangan & Perulangan"
+title: Percabangan dan Perulangan di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Percabangan dan Perulangan
+Percabangan dan perulangan digunakan untuk membuat program lebih dinamis. Percabangan membantu program mengambil keputusan, sedangkan perulangan membantu program menjalankan kode yang sama berkali-kali.
+
+## Percabangan
+Percabangan digunakan ketika program perlu memilih aksi berdasarkan kondisi tertentu.
+
+### IF
+
+```r
+nilai <- 85
+
+if (nilai >= 75) {
+  print("Mahasiswa lulus")
+}
+```
+
+> Penjelasan: Karena nilai `85` lebih besar atau sama dengan `75`, kondisi bernilai `TRUE` dan program menampilkan "Mahasiswa lulus".
+
+### IF dan ELSE
+
+```r
+nilai <- 60
+
+if (nilai >= 75) {
+  print("Mahasiswa lulus")
+} else {
+  print("Mahasiswa belum lulus")
+}
+```
+
+> Penjelasan: Bagian `else` dijalankan ketika kondisi pada `if` bernilai `FALSE`.
+
+### ELSE IF
+
+```r
+nilai <- 85
+
+if (nilai >= 90) {
+  print("Grade A")
+} else if (nilai >= 80) {
+  print("Grade B")
+} else if (nilai >= 70) {
+  print("Grade C")
+} else {
+  print("Grade D")
+}
+```
+
+> Penjelasan: R mengecek kondisi dari atas ke bawah. Kondisi pertama yang bernilai `TRUE` akan dijalankan.
+
+## Perulangan
+Perulangan digunakan untuk menjalankan kode yang sama beberapa kali.
+
+### For Loop
+
+```r
+daftar_materi <- c("R", "Git", "Python")
+
+for (materi in daftar_materi) {
+  print(materi)
+}
+```
+
+> Penjelasan: Variabel `materi` mengambil isi dari `daftar_materi` satu per satu.
+
+`for` juga sering digunakan bersama range angka.
+
+```r
+for (angka in 1:5) {
+  print(angka)
+}
+```
+
+> Penjelasan: `1:5` menghasilkan angka dari 1 sampai 5.
+
+### While Loop
+
+```r
+angka <- 1
+
+while (angka <= 5) {
+  print(angka)
+  angka <- angka + 1
+}
+```
+
+> Penjelasan: Selama `angka <= 5` bernilai `TRUE`, isi `while` akan terus dijalankan.
+
+## Next dan Break
+Di R, `next` digunakan untuk melewati perulangan saat ini, sedangkan `break` digunakan untuk menghentikan perulangan.
+
+### Next
+
+```r
+for (angka in 1:5) {
+  if (angka == 3) {
+    next
+  }
+
+  print(angka)
+}
+```
+
+> Penjelasan: Saat `angka` bernilai 3, `print(angka)` dilewati dan perulangan lanjut ke angka berikutnya.
+
+### Break
+
+```r
+for (angka in 1:5) {
+  if (angka == 3) {
+    break
+  }
+
+  print(angka)
+}
+```
+
+> Penjelasan: Saat `angka` bernilai 3, perulangan langsung berhenti.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nilai` dengan angka bebas.
+- Gunakan `if`, `else if`, dan `else` untuk menentukan grade nilai.
+- Buat `for loop` untuk menampilkan angka 1 sampai 10.
+- Gunakan `next` untuk melewati angka 5.
+- Gunakan `break` untuk menghentikan perulangan saat angka lebih besar dari 8.
+- Buat contoh `while loop` yang menampilkan angka 1 sampai 5.

@@ -1,0 +1,164 @@
+---
+sidebar_position: 5
+sidebar_label: "Fungsi & Scope"
+title: Fungsi dan Scope di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Fungsi dan Scope
+Fungsi adalah blok kode yang dibuat untuk menjalankan tugas tertentu. Dengan fungsi, kode bisa ditulis lebih rapi, mudah dibaca, dan bisa digunakan kembali.
+
+## Scope
+Scope menentukan di mana suatu variabel bisa digunakan.
+
+### Local Scope
+
+```r
+tampilkan_nama <- function() {
+  nama <- "Budi"
+  print(nama)
+}
+
+tampilkan_nama()
+```
+
+> Penjelasan: Variabel `nama` dibuat di dalam fungsi, sehingga hanya aman digunakan di dalam fungsi tersebut.
+
+### Global Scope
+
+```r
+mata_kuliah <- "Pemrograman Open Source"
+
+tampilkan_mata_kuliah <- function() {
+  print(mata_kuliah)
+}
+
+tampilkan_mata_kuliah()
+print(mata_kuliah)
+```
+
+> Penjelasan: Variabel `mata_kuliah` dibuat di luar fungsi, sehingga bisa dibaca dari dalam dan luar fungsi.
+
+## Membuat Fungsi
+Fungsi di R dibuat menggunakan `function()`.
+
+```r
+sapa <- function() {
+  print("Halo, selamat belajar R")
+}
+
+sapa()
+```
+
+> Penjelasan: Fungsi `sapa()` tidak akan berjalan sebelum dipanggil.
+
+## Parameter dan Argumen
+
+```r
+sapa <- function(nama) {
+  print(paste("Halo,", nama))
+}
+
+sapa("Budi")
+sapa("Ani")
+```
+
+> Penjelasan: `nama` adalah parameter, sedangkan `"Budi"` dan `"Ani"` adalah argumen yang dikirim ke fungsi.
+
+## Default Parameter
+
+```r
+sapa <- function(nama = "Mahasiswa") {
+  print(paste("Halo,", nama))
+}
+
+sapa()
+sapa("Budi")
+```
+
+> Penjelasan: Jika argumen tidak dikirim, parameter `nama` menggunakan nilai default.
+
+## Return Value
+Di R, nilai terakhir di dalam fungsi bisa menjadi hasil return. Namun agar lebih jelas, kita juga bisa menggunakan `return()`.
+
+```r
+tambah <- function(a, b) {
+  hasil <- a + b
+  return(hasil)
+}
+
+total <- tambah(10, 5)
+
+print(total)
+```
+
+## Fungsi dengan Vector
+
+```r
+hitung_rata_rata <- function(nilai) {
+  total <- sum(nilai)
+  rata_rata <- total / length(nilai)
+  return(rata_rata)
+}
+
+daftar_nilai <- c(80, 90, 75, 85)
+
+print(hitung_rata_rata(daftar_nilai))
+```
+
+> Penjelasan: Fungsi menerima vector nilai, menjumlahkan semua isinya, lalu membagi total dengan jumlah data.
+
+## Fungsi dengan Banyak Return
+Untuk mengembalikan beberapa nilai, gunakan `list()`.
+
+```r
+hitung_nilai <- function(nilai) {
+  nilai_tertinggi <- max(nilai)
+  nilai_terendah <- min(nilai)
+  rata_rata <- mean(nilai)
+
+  return(list(
+    tertinggi = nilai_tertinggi,
+    terendah = nilai_terendah,
+    rata_rata = rata_rata
+  ))
+}
+
+hasil <- hitung_nilai(c(80, 90, 75, 85))
+
+print(hasil$tertinggi)
+print(hasil$terendah)
+print(hasil$rata_rata)
+```
+
+## Anonymous Function
+Anonymous function adalah fungsi tanpa nama. Di R, fungsi seperti ini sering digunakan bersama `sapply()`, `lapply()`, atau `apply()`.
+
+```r
+nilai <- c(1, 2, 3, 4, 5)
+
+kuadrat <- sapply(nilai, function(angka) angka ^ 2)
+
+print(kuadrat)
+```
+
+> Penjelasan: Fungsi `function(angka) angka ^ 2` dijalankan untuk setiap elemen vector `nilai`.
+
+## Kapan Menggunakan Fungsi
+
+- Gunakan fungsi jika ada logika yang dipakai berulang kali.
+- Gunakan fungsi jika kode mulai panjang dan sulit dibaca.
+- Gunakan parameter agar fungsi bisa menerima input yang berbeda.
+- Gunakan `return()` atau nilai akhir fungsi agar hasilnya bisa digunakan lagi.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel global `nama_kelas`.
+- Buat fungsi yang menampilkan `nama_kelas`.
+- Buat fungsi `hitung_luas_persegi_panjang()` dengan parameter `panjang` dan `lebar`.
+- Buat fungsi `hitung_rata_rata()` yang menerima vector nilai.
+- Buat fungsi yang mengembalikan nilai tertinggi, nilai terendah, dan rata-rata menggunakan `list()`.
+- Gunakan `sapply()` untuk menghitung kuadrat dari setiap angka.

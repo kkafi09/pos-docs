@@ -1,0 +1,124 @@
+---
+sidebar_position: 9
+sidebar_label: Visualisasi
+title: Visualisasi Data di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Visualisasi Data
+Visualisasi digunakan untuk menampilkan data dalam bentuk grafik agar pola data lebih mudah dilihat. Di R, visualisasi bisa dibuat menggunakan fungsi bawaan seperti `plot()` dan `barplot()`.
+
+## Membuat Grafik Line Sederhana
+
+```r
+minggu <- c(1, 2, 3, 4, 5)
+nilai <- c(80, 82, 78, 85, 90)
+
+plot(minggu, nilai, type = "l")
+```
+
+> Penjelasan: `type = "l"` membuat grafik berbentuk garis.
+
+## Menambahkan Judul dan Label
+
+```r
+plot(
+  minggu,
+  nilai,
+  type = "l",
+  main = "Perkembangan Nilai",
+  xlab = "Minggu",
+  ylab = "Nilai"
+)
+```
+
+## Menambahkan Marker dan Warna
+
+```r
+plot(
+  minggu,
+  nilai,
+  type = "b",
+  col = "blue",
+  pch = 19,
+  main = "Perkembangan Nilai",
+  xlab = "Minggu",
+  ylab = "Nilai"
+)
+```
+
+> Penjelasan: `type = "b"` menampilkan garis dan titik. `col` mengatur warna, sedangkan `pch` mengatur bentuk titik.
+
+## Membuat Grafik Batang
+
+```r
+materi <- c("R", "Git", "Python")
+jumlah <- c(30, 25, 28)
+
+barplot(
+  jumlah,
+  names.arg = materi,
+  col = "skyblue",
+  main = "Jumlah Mahasiswa per Materi",
+  xlab = "Materi",
+  ylab = "Jumlah"
+)
+```
+
+## Grafik dari Data Frame
+
+```r
+data <- data.frame(
+  minggu = c(1, 2, 3, 4, 5),
+  nilai = c(80, 82, 78, 85, 90)
+)
+
+plot(data$minggu, data$nilai, type = "b")
+```
+
+## Menyimpan Grafik
+
+```r
+png("grafik_nilai.png", width = 800, height = 600)
+
+plot(minggu, nilai, type = "b", main = "Perkembangan Nilai")
+
+dev.off()
+```
+
+> Penjelasan: `png()` membuka file output gambar, lalu `dev.off()` menutup proses penyimpanan grafik.
+
+## Contoh Kasus Xbar Chart
+
+```r
+xbar <- c(12.0, 11.0, 15.4, 11.6)
+bka <- 14.5
+bkb <- 10.5
+
+plot(
+  xbar,
+  type = "b",
+  ylim = c(9, 16),
+  main = "Xbar Chart",
+  xlab = "Observasi",
+  ylab = "Xbar"
+)
+
+abline(h = bka, col = "red", lty = 2)
+abline(h = bkb, col = "red", lty = 2)
+abline(h = mean(xbar), col = "blue", lty = 2)
+```
+
+> Penjelasan: `abline()` digunakan untuk menambahkan garis batas BKA, BKB, dan rata-rata.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat vector minggu dan nilai.
+- Buat grafik line menggunakan `plot()`.
+- Tambahkan judul, label sumbu x, dan label sumbu y.
+- Ubah warna dan tambahkan marker.
+- Buat grafik batang menggunakan `barplot()`.
+- Simpan salah satu grafik menjadi file PNG.

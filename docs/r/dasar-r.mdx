@@ -1,0 +1,202 @@
+---
+sidebar_position: 1
+sidebar_label: Dasar R
+title: Dasar R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Dasar R
+R adalah bahasa pemrograman yang banyak digunakan untuk statistik, data analysis, visualisasi, dan komputasi numerik. Pada praktikum ini, fokus awalnya adalah sintaks dasar dan cara menulis kode R yang mudah dibaca.
+
+## Hello World
+Langkah pertama dalam mempelajari suatu bahasa pemrograman adalah memahami bagaimana cara menampilkan informasi ke layar. Di R, kita bisa menggunakan `print()` atau langsung menuliskan nilainya.
+
+```r
+print("Hello World")
+```
+
+> Penjelasan: `print()` digunakan untuk menampilkan teks ke console. Teks ditulis di dalam tanda kutip karena berupa string.
+
+## Mengenal Variabel
+Variabel digunakan untuk menyimpan data agar bisa digunakan kembali di bagian program lain. Di R, assignment biasanya ditulis menggunakan `<-`.
+
+```r
+mata_kuliah <- "Pemrograman Open Source"
+
+print(mata_kuliah)
+```
+
+> Penjelasan: Variabel `mata_kuliah` menyimpan teks. Saat dipanggil dengan `print(mata_kuliah)`, R menampilkan isi variabel tersebut.
+
+R juga menerima assignment dengan `=`, tetapi `<-` lebih umum digunakan dalam materi dan dokumentasi R.
+
+```r
+nama <- "Budi"
+umur = 20
+
+print(nama)
+print(umur)
+```
+
+### Aturan Penamaan Variabel
+Memberikan nama pada variabel di R memiliki beberapa ketentuan:
+
+- Variabel sebaiknya tidak dimulai dengan angka.
+- Variabel tidak boleh memiliki spasi.
+- Gunakan `_` atau `.` sebagai pemisah antar kata.
+- Hindari menggunakan nama fungsi bawaan seperti `mean`, `sum`, atau `data`.
+- R bersifat case sensitive, sehingga `nama` dan `Nama` dianggap berbeda.
+
+```r
+nama_mahasiswa <- "Budi"
+Nama_mahasiswa <- "Ani"
+
+print(nama_mahasiswa)
+print(Nama_mahasiswa)
+```
+
+> Penjelasan: Dua variabel di atas berbeda karena huruf besar dan huruf kecil dibaca sebagai nama yang berbeda.
+
+## Tipe Data
+Tipe data adalah jenis nilai yang disimpan di dalam variabel. Beberapa tipe data dasar yang sering digunakan di R:
+
+- `character` untuk teks.
+- `numeric` untuk bilangan desimal atau bilangan umum.
+- `integer` untuk bilangan bulat.
+- `logical` untuk nilai benar atau salah.
+- `vector` untuk menyimpan banyak nilai dengan tipe data yang sama.
+
+```r
+nama <- "Budi"
+umur <- 20L
+ipk <- 3.75
+lulus <- TRUE
+nilai <- c(80, 90, 75)
+
+print(nama)
+print(umur)
+print(ipk)
+print(lulus)
+print(nilai)
+```
+
+> Penjelasan: `20L` membuat angka sebagai integer. `TRUE` adalah nilai boolean di R, dan `c()` digunakan untuk membuat vector.
+
+Untuk mengecek tipe data, gunakan `class()` atau `typeof()`.
+
+```r
+print(class(nama))
+print(class(umur))
+print(class(ipk))
+print(class(lulus))
+```
+
+## Casting Tipe Data
+Casting adalah proses mengubah nilai dari satu tipe data ke tipe data lain. Ini sering digunakan ketika data yang dibaca masih berupa teks, tetapi ingin digunakan untuk perhitungan.
+
+```r
+umur <- "20"
+umur_angka <- as.numeric(umur)
+
+print(umur_angka + 5)
+```
+
+Beberapa fungsi casting yang umum digunakan:
+
+- `as.numeric()` untuk mengubah nilai menjadi angka.
+- `as.integer()` untuk mengubah nilai menjadi bilangan bulat.
+- `as.character()` untuk mengubah nilai menjadi teks.
+- `as.logical()` untuk mengubah nilai menjadi boolean.
+
+```r
+angka <- as.numeric("10")
+teks <- as.character(100)
+status <- as.logical(1)
+
+print(angka)
+print(teks)
+print(status)
+```
+
+> Penjelasan: Tidak semua teks bisa diubah menjadi angka. Jika teks tidak dikenali sebagai angka, R biasanya menghasilkan `NA`.
+
+## Operator
+Operator adalah simbol yang digunakan untuk melakukan operasi terhadap nilai atau variabel.
+
+### Operasi Aritmatika
+
+```r
+a <- 10
+b <- 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a %% b)
+print(a ^ b)
+```
+
+Beberapa operator aritmatika yang sering digunakan:
+
+- `+` untuk penjumlahan.
+- `-` untuk pengurangan.
+- `*` untuk perkalian.
+- `/` untuk pembagian.
+- `%%` untuk sisa bagi.
+- `^` untuk perpangkatan.
+
+### Operasi Komparasi
+
+```r
+nilai <- 85
+
+print(nilai == 85)
+print(nilai != 75)
+print(nilai > 80)
+print(nilai < 80)
+print(nilai >= 85)
+print(nilai <= 90)
+```
+
+> Penjelasan: Hasil komparasi adalah `TRUE` atau `FALSE`.
+
+### Operasi Logika Boolean
+
+```r
+nilai <- 85
+kehadiran <- 90
+
+lulus_nilai <- nilai >= 75
+lulus_kehadiran <- kehadiran >= 80
+
+print(lulus_nilai & lulus_kehadiran)
+print(lulus_nilai | lulus_kehadiran)
+print(!lulus_nilai)
+```
+
+> Penjelasan: `&` berarti dan, `|` berarti atau, sedangkan `!` digunakan untuk membalik nilai boolean.
+
+Contoh penggunaan dalam kasus sederhana:
+
+```r
+nilai <- 85
+kehadiran <- 90
+
+if (nilai >= 75 & kehadiran >= 80) {
+  print("Mahasiswa lulus")
+} else {
+  print("Mahasiswa belum lulus")
+}
+```
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat variabel `nama`, `umur`, dan `nilai`.
+- Tampilkan semua variabel menggunakan `print()`.
+- Cek tipe data masing-masing variabel menggunakan `class()`.
+- Buat kondisi sederhana untuk mengecek apakah `nilai` lebih besar atau sama dengan 75.
+- Tampilkan teks `"Lulus"` jika kondisi terpenuhi, dan `"Belum lulus"` jika tidak terpenuhi.

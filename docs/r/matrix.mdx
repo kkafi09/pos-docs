@@ -1,0 +1,132 @@
+---
+sidebar_position: 7
+sidebar_label: Matrix
+title: Matrix di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Matrix
+Matrix adalah susunan angka dalam bentuk baris dan kolom. Di R, matrix bisa dibuat langsung menggunakan fungsi `matrix()`.
+
+## Membuat Matrix
+
+```r
+matrix_a <- matrix(
+  c(1, 2, 3, 4, 5, 6),
+  nrow = 2,
+  ncol = 3,
+  byrow = TRUE
+)
+
+print(matrix_a)
+```
+
+> Penjelasan: `nrow` menentukan jumlah baris, `ncol` menentukan jumlah kolom, dan `byrow = TRUE` mengisi matrix berdasarkan baris.
+
+## Mengakses Elemen Matrix
+
+```r
+print(matrix_a[1, 1])
+print(matrix_a[2, 3])
+print(matrix_a[1, ])
+print(matrix_a[, 2])
+```
+
+> Penjelasan: Index pertama adalah baris, index kedua adalah kolom. R menggunakan index mulai dari 1.
+
+## Mengecek Ukuran Matrix
+
+```r
+print(dim(matrix_a))
+print(nrow(matrix_a))
+print(ncol(matrix_a))
+```
+
+## Membuat Matrix Nol
+
+```r
+matrix_nol <- matrix(0, nrow = 3, ncol = 3)
+
+print(matrix_nol)
+```
+
+## Penjumlahan dan Pengurangan Matrix
+
+```r
+a <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+b <- matrix(c(5, 6, 7, 8), nrow = 2, byrow = TRUE)
+
+print(a + b)
+print(a - b)
+```
+
+> Penjelasan: Penjumlahan dan pengurangan matrix dilakukan berdasarkan posisi elemen yang sama.
+
+## Perkalian Matrix dengan Skalar
+
+```r
+print(a * 3)
+```
+
+> Penjelasan: Semua elemen matrix dikalikan dengan angka 3.
+
+## Perkalian Matrix
+Untuk perkalian matrix, gunakan operator `%*%`.
+
+```r
+a <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+b <- matrix(c(5, 6, 7, 8), nrow = 2, byrow = TRUE)
+
+print(a %*% b)
+```
+
+> Penjelasan: `%*%` melakukan perkalian matrix, bukan perkalian per elemen.
+
+## Transpose Matrix
+
+```r
+print(t(a))
+```
+
+> Penjelasan: `t()` menukar baris menjadi kolom.
+
+## Determinan Matrix
+
+```r
+determinan <- det(a)
+
+print(determinan)
+```
+
+> Penjelasan: `det()` digunakan untuk menghitung determinan matrix persegi.
+
+## Mengecek Ukuran Sebelum Operasi
+
+```r
+bisa_dijumlahkan <- function(a, b) {
+  return(all(dim(a) == dim(b)))
+}
+
+bisa_dikalikan <- function(a, b) {
+  return(ncol(a) == nrow(b))
+}
+
+print(bisa_dijumlahkan(a, b))
+print(bisa_dikalikan(a, b))
+```
+
+> Penjelasan: Penjumlahan membutuhkan ukuran yang sama, sedangkan perkalian membutuhkan jumlah kolom matrix pertama sama dengan jumlah baris matrix kedua.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat dua matrix berukuran 2 x 2.
+- Tampilkan ukuran matrix menggunakan `dim()`.
+- Jumlahkan dua matrix.
+- Kurangi dua matrix.
+- Kalikan matrix dengan skalar.
+- Kalikan dua matrix menggunakan `%*%`.
+- Buat transpose matrix menggunakan `t()`.
+- Hitung determinan matrix menggunakan `det()`.

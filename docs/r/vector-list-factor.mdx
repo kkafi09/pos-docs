@@ -1,0 +1,148 @@
+---
+sidebar_position: 4
+sidebar_label: "Vector, List & Factor"
+title: Vector, List, dan Factor
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Vector, List, dan Factor
+Vector, list, dan factor adalah struktur data yang sering digunakan di R. Ketiganya bisa menyimpan banyak data, tetapi memiliki aturan dan kegunaan yang berbeda.
+
+## Vector
+Vector adalah struktur data dasar di R untuk menyimpan banyak nilai dengan tipe data yang sama.
+
+### Penulisan Vector
+
+```r
+nama_mahasiswa <- c("Budi", "Ani", "Citra")
+nilai <- c(80, 90, 75)
+
+print(nama_mahasiswa)
+print(nilai)
+```
+
+> Penjelasan: Fungsi `c()` digunakan untuk menggabungkan beberapa nilai menjadi satu vector.
+
+Vector diakses menggunakan index yang dimulai dari 1.
+
+```r
+print(nama_mahasiswa[1])
+print(nama_mahasiswa[2])
+```
+
+### Membuat Vector dengan Range
+
+```r
+angka <- 1:5
+angka_genap <- seq(2, 10, by = 2)
+
+print(angka)
+print(angka_genap)
+```
+
+> Penjelasan: `1:5` menghasilkan angka 1 sampai 5, sedangkan `seq()` digunakan ketika kita ingin mengatur jarak antar angka.
+
+### Manipulasi Vector
+
+```r
+materi <- c("R", "Git", "Python")
+
+materi <- c(materi, "Data Analysis")
+materi[2] <- "GitHub"
+
+print(materi)
+```
+
+> Penjelasan: Vector bisa ditambah dengan menggabungkan vector lama dan nilai baru. Isi vector juga bisa diubah menggunakan index.
+
+### Operasi Vector
+R bisa melakukan operasi langsung ke seluruh elemen vector.
+
+```r
+nilai <- c(80, 90, 75)
+
+print(nilai + 5)
+print(nilai * 2)
+print(mean(nilai))
+print(max(nilai))
+print(min(nilai))
+```
+
+> Penjelasan: Operasi `nilai + 5` dilakukan ke setiap elemen. Ini membuat R nyaman digunakan untuk perhitungan data.
+
+## List
+List adalah struktur data yang bisa menyimpan banyak nilai dengan tipe data berbeda.
+
+```r
+mahasiswa <- list(
+  nama = "Budi",
+  umur = 20,
+  nilai = c(80, 90, 75),
+  lulus = TRUE
+)
+
+print(mahasiswa)
+print(mahasiswa$nama)
+print(mahasiswa$nilai)
+```
+
+> Penjelasan: List cocok digunakan untuk data yang komponennya beragam, misalnya teks, angka, vector, dan boolean.
+
+List juga bisa diakses menggunakan nama elemen atau index.
+
+```r
+print(mahasiswa[["nama"]])
+print(mahasiswa[[1]])
+```
+
+## Factor
+Factor digunakan untuk data kategori, misalnya jenis kelamin, kelas, status, atau grade.
+
+```r
+status <- factor(c("Lulus", "Belum lulus", "Lulus", "Lulus"))
+
+print(status)
+print(levels(status))
+```
+
+> Penjelasan: `levels()` menampilkan kategori unik yang dimiliki factor.
+
+Factor berguna ketika data kategori memiliki urutan.
+
+```r
+grade <- factor(
+  c("B", "A", "C", "B"),
+  levels = c("C", "B", "A"),
+  ordered = TRUE
+)
+
+print(grade)
+```
+
+## Perbedaan Vector, List, dan Factor
+
+- `vector` menyimpan banyak nilai dengan tipe data yang sama.
+- `list` bisa menyimpan banyak nilai dengan tipe data berbeda.
+- `factor` digunakan untuk data kategori.
+
+```r
+contoh_vector <- c(80, 90, 75)
+contoh_list <- list("Budi", 20, TRUE)
+contoh_factor <- factor(c("A", "B", "A"))
+
+print(contoh_vector)
+print(contoh_list)
+print(contoh_factor)
+```
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat vector `nilai` yang berisi minimal 5 angka.
+- Tambahkan satu nilai baru ke vector.
+- Buat vector baru yang berisi nilai di atas 75.
+- Tampilkan isi vector menggunakan `for loop`.
+- Buat list berisi nama mahasiswa, umur, dan daftar nilai.
+- Buat factor untuk status kelulusan mahasiswa.

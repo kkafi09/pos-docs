@@ -1,0 +1,162 @@
+---
+sidebar_position: 1
+sidebar_label: "Trapezoidal R & Python"
+title: Menghitung Metode Trapezoidal di R dan Python
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Menghitung Metode Trapezoidal di R dan Python
+Metode trapezoidal adalah metode numerik untuk memperkirakan luas area di bawah kurva. Metode ini sering digunakan ketika integral sulit dihitung secara manual atau data yang tersedia berupa titik-titik pengamatan.
+
+## Rumus Trapezoidal
+Jika interval dari `a` sampai `b` dibagi menjadi `n` bagian dengan lebar `h`, rumus trapezoidal adalah:
+
+```text
+Luas = h / 2 * (f(x0) + 2f(x1) + 2f(x2) + ... + 2f(xn-1) + f(xn))
+```
+
+Dengan:
+
+- `h = (b - a) / n`
+- `x0 = a`
+- `xn = b`
+- nilai tengah dikalikan 2
+
+## Contoh Soal
+Hitung pendekatan integral dari fungsi berikut pada interval 0 sampai 4 dengan 4 subinterval.
+
+```text
+f(x) = x^2 + 2x + 1
+```
+
+Langkah awal:
+
+- `a = 0`
+- `b = 4`
+- `n = 4`
+- `h = (4 - 0) / 4 = 1`
+- titik x adalah `0, 1, 2, 3, 4`
+
+## Penyelesaian Manual Singkat
+Hitung nilai fungsi pada setiap titik.
+
+```text
+f(0) = 1
+f(1) = 4
+f(2) = 9
+f(3) = 16
+f(4) = 25
+```
+
+Masukkan ke rumus trapezoidal:
+
+```text
+Luas = 1 / 2 * (1 + 2(4 + 9 + 16) + 25)
+Luas = 0.5 * (1 + 58 + 25)
+Luas = 42
+```
+
+Jadi, hasil pendekatan integralnya adalah `42`.
+
+## Implementasi di R
+
+```r
+f <- function(x) {
+  return(x ^ 2 + 2 * x + 1)
+}
+
+a <- 0
+b <- 4
+n <- 4
+
+h <- (b - a) / n
+x <- seq(a, b, by = h)
+y <- f(x)
+
+luas <- (h / 2) * (y[1] + 2 * sum(y[2:n]) + y[n + 1])
+
+print(x)
+print(y)
+print(luas)
+```
+
+> Penjelasan: `seq(a, b, by = h)` membuat titik x dari 0 sampai 4. Nilai tengah `y[2:n]` dijumlahkan lalu dikalikan 2. Index R dimulai dari 1, sehingga nilai terakhir adalah `y[n + 1]`.
+
+## Implementasi di Python
+
+```python
+def f(x):
+    return x ** 2 + 2 * x + 1
+
+
+a = 0
+b = 4
+n = 4
+
+h = (b - a) / n
+x = [a + i * h for i in range(n + 1)]
+y = [f(item) for item in x]
+
+luas = (h / 2) * (y[0] + 2 * sum(y[1:n]) + y[n])
+
+print(x)
+print(y)
+print(luas)
+```
+
+> Penjelasan: Python menggunakan index mulai dari 0. Karena itu, nilai pertama adalah `y[0]` dan nilai terakhir adalah `y[n]`.
+
+## Membuat Fungsi Trapezoidal di R
+
+```r
+trapezoidal <- function(f, a, b, n) {
+  h <- (b - a) / n
+  x <- seq(a, b, by = h)
+  y <- f(x)
+
+  luas <- (h / 2) * (y[1] + 2 * sum(y[2:n]) + y[n + 1])
+
+  return(luas)
+}
+
+hasil <- trapezoidal(function(x) x ^ 2 + 2 * x + 1, 0, 4, 4)
+
+print(hasil)
+```
+
+## Membuat Fungsi Trapezoidal di Python
+
+```python
+def trapezoidal(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    y = [f(item) for item in x]
+
+    luas = (h / 2) * (y[0] + 2 * sum(y[1:n]) + y[n])
+
+    return luas
+
+
+hasil = trapezoidal(lambda x: x ** 2 + 2 * x + 1, 0, 4, 4)
+
+print(hasil)
+```
+
+## Perbandingan R dan Python
+
+| Bagian | R | Python |
+| --- | --- | --- |
+| Membuat fungsi | `function(x)` | `def f(x):` atau `lambda x:` |
+| Pangkat | `x ^ 2` | `x ** 2` |
+| Membuat urutan angka | `seq(a, b, by = h)` | list comprehension dengan `range()` |
+| Index awal | 1 | 0 |
+| Nilai terakhir pada rumus | `y[n + 1]` | `y[n]` |
+
+## Latihan Singkat
+
+Coba kerjakan soal berikut menggunakan R dan Python:
+
+- Hitung integral pendekatan dari `f(x) = x^3 + 1` pada interval 0 sampai 2 dengan 4 subinterval.
+- Hitung integral pendekatan dari `f(x) = 2x + 3` pada interval 1 sampai 5 dengan 8 subinterval.
+- Ubah fungsi `trapezoidal()` agar juga menampilkan nilai `x`, nilai `y`, dan hasil luas.

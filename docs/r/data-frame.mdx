@@ -1,0 +1,153 @@
+---
+sidebar_position: 8
+sidebar_label: Data Frame
+title: Data Frame di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# Data Frame
+Data frame adalah struktur data berbentuk tabel. Di R, data frame sering digunakan untuk analisis data karena setiap kolom bisa memiliki tipe data yang berbeda.
+
+## Membuat Data Frame
+
+```r
+data_mahasiswa <- data.frame(
+  nama = c("Budi", "Ani", "Citra"),
+  kelas = c("A", "A", "B"),
+  nilai = c(80, 90, 75)
+)
+
+print(data_mahasiswa)
+```
+
+> Penjelasan: Setiap argumen di dalam `data.frame()` menjadi satu kolom.
+
+## Melihat Isi Data
+
+```r
+print(head(data_mahasiswa))
+print(str(data_mahasiswa))
+print(summary(data_mahasiswa))
+```
+
+Beberapa fungsi yang sering digunakan:
+
+- `head()` untuk melihat data bagian awal.
+- `str()` untuk melihat struktur data.
+- `summary()` untuk melihat ringkasan data.
+
+## Mengambil Kolom
+
+```r
+print(data_mahasiswa$nama)
+print(data_mahasiswa["nilai"])
+print(data_mahasiswa[, c("nama", "nilai")])
+```
+
+> Penjelasan: Operator `$` sering digunakan untuk mengambil satu kolom berdasarkan nama.
+
+## Menambahkan Kolom Baru
+
+```r
+data_mahasiswa$status <- ifelse(data_mahasiswa$nilai >= 75, "Lulus", "Belum lulus")
+
+print(data_mahasiswa)
+```
+
+> Penjelasan: `ifelse()` membuat pilihan berdasarkan kondisi untuk setiap baris.
+
+## Contoh Rekap Nilai Mahasiswa
+
+```r
+data_mahasiswa <- data.frame(
+  nama = c("Budi", "Ani", "Citra", "Dina"),
+  nilai = c(80, 90, 70, 85)
+)
+
+rata_rata <- mean(data_mahasiswa$nilai)
+nilai_tertinggi <- max(data_mahasiswa$nilai)
+nilai_terendah <- min(data_mahasiswa$nilai)
+
+print(rata_rata)
+print(nilai_tertinggi)
+print(nilai_terendah)
+```
+
+## Menghitung Xbar dan R
+Dalam beberapa soal pengolahan data, kita diminta menghitung rata-rata dan range dari beberapa kolom, misalnya `x1` sampai `x5`.
+
+```r
+data <- data.frame(
+  x1 = c(10, 9, 15),
+  x2 = c(12, 10, 14),
+  x3 = c(11, 12, 16),
+  x4 = c(13, 11, 15),
+  x5 = c(14, 13, 17)
+)
+
+kolom_x <- data[, c("x1", "x2", "x3", "x4", "x5")]
+
+data$xbar <- rowMeans(kolom_x)
+data$R <- apply(kolom_x, 1, max) - apply(kolom_x, 1, min)
+
+print(data)
+```
+
+> Penjelasan: `rowMeans()` menghitung rata-rata per baris. `apply(kolom_x, 1, max)` mengambil nilai terbesar per baris.
+
+## Menghitung BKA, BKB, dan Status
+
+```r
+rata_rata_xbar <- mean(data$xbar)
+rata_rata_R <- mean(data$R)
+
+bka <- rata_rata_xbar + (0.577 * rata_rata_R)
+bkb <- rata_rata_xbar - (0.577 * rata_rata_R)
+
+data$BKA <- bka
+data$BKB <- bkb
+data$status <- ifelse(data$xbar <= bka & data$xbar >= bkb, "Terkendali", "Tidak terkendali")
+
+print(data)
+```
+
+> Penjelasan: BKA dan BKB dihitung dari rata-rata `xbar` dan rata-rata `R`, lalu status ditentukan menggunakan `ifelse()`.
+
+## Moving Average
+
+```r
+moving_average <- function(data, ukuran_window) {
+  hasil <- c()
+
+  for (i in 1:(length(data) - ukuran_window + 1)) {
+    rata_rata <- mean(data[i:(i + ukuran_window - 1)])
+    hasil <- c(hasil, rata_rata)
+  }
+
+  return(hasil)
+}
+
+nilai <- c(10, 12, 11, 13, 14, 15)
+
+print(moving_average(nilai, 3))
+```
+
+## Menyimpan Data Frame
+
+```r
+write.csv(data, "hasil_pengolahan.csv", row.names = FALSE)
+```
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat data frame berisi 5 kolom data angka dan minimal 5 baris.
+- Hitung `xbar` atau rata-rata setiap baris.
+- Hitung `R` atau range setiap baris.
+- Hitung rata-rata dari `xbar`.
+- Hitung rata-rata dari `R`.
+- Hitung BKA dan BKB.
+- Tentukan status `"Terkendali"` atau `"Tidak terkendali"` menggunakan `ifelse()`.
+- Buat fungsi `moving_average()`.

@@ -1,0 +1,142 @@
+---
+sidebar_position: 6
+sidebar_label: File System I/O
+title: File System I/O di R
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+
+# File System I/O
+File System I/O digunakan untuk membaca dan menulis file. Di R, file yang sering digunakan dalam praktikum adalah TXT, CSV, dan Excel.
+
+## Path File
+Path adalah alamat lokasi file. Jika file berada di folder kerja yang sama, kita cukup menulis nama filenya.
+
+```r
+print(getwd())
+```
+
+> Penjelasan: `getwd()` menampilkan working directory yang sedang digunakan R.
+
+Untuk mengganti working directory, gunakan `setwd()`.
+
+```r
+setwd("D:/praktikum")
+```
+
+## Membaca File TXT
+
+```r
+isi_file <- readLines("catatan.txt")
+
+print(isi_file)
+```
+
+> Penjelasan: `readLines()` membaca file teks per baris dan menyimpannya sebagai vector character.
+
+## Menulis File TXT
+
+```r
+catatan <- c("Belajar R", "Belajar data analysis")
+
+writeLines(catatan, "catatan.txt")
+```
+
+> Penjelasan: `writeLines()` menulis vector teks ke file.
+
+## Membaca File CSV
+
+```r
+data <- read.csv("nilai.csv")
+
+print(data)
+```
+
+> Penjelasan: `read.csv()` membaca file CSV dan menghasilkan data frame.
+
+## Menulis File CSV
+
+```r
+data <- data.frame(
+  nama = c("Budi", "Ani", "Citra"),
+  nilai = c(80, 90, 75)
+)
+
+write.csv(data, "hasil_nilai.csv", row.names = FALSE)
+```
+
+> Penjelasan: `row.names = FALSE` digunakan agar nomor baris tidak ikut disimpan sebagai kolom baru.
+
+## Membaca Excel
+Untuk membaca Excel, kita bisa menggunakan package `readxl`.
+
+```r
+install.packages("readxl")
+library(readxl)
+
+data <- read_excel("nilai.xlsx")
+
+print(data)
+```
+
+> Penjelasan: `read_excel()` membaca file `.xlsx` menjadi data frame atau tibble.
+
+## Menulis File Excel
+Untuk menulis Excel, kita bisa menggunakan package `writexl`.
+
+```r
+install.packages("writexl")
+library(writexl)
+
+data <- data.frame(
+  nama = c("Budi", "Ani", "Citra"),
+  nilai = c(80, 90, 75)
+)
+
+write_xlsx(data, "hasil_nilai.xlsx")
+```
+
+## Mengolah Kolom X1 sampai X5 dari CSV
+Misalnya file CSV memiliki kolom `x1` sampai `x5`. Kita bisa menghitung `xbar` dan `R` seperti berikut.
+
+```r
+data <- read.csv("data_pengukuran.csv")
+
+kolom_x <- data[, c("x1", "x2", "x3", "x4", "x5")]
+
+data$xbar <- rowMeans(kolom_x)
+data$R <- apply(kolom_x, 1, max) - apply(kolom_x, 1, min)
+
+print(data)
+```
+
+> Penjelasan: `rowMeans()` menghitung rata-rata per baris, sedangkan `apply(..., 1, ...)` menjalankan fungsi untuk setiap baris.
+
+## Membuat Folder Output
+
+```r
+if (!dir.exists("output")) {
+  dir.create("output")
+}
+
+write.csv(data, "output/hasil.csv", row.names = FALSE)
+```
+
+> Penjelasan: `dir.exists()` mengecek apakah folder sudah ada, sedangkan `dir.create()` membuat folder baru.
+
+## Error yang Sering Terjadi
+
+- File tidak ditemukan karena working directory berbeda.
+- Nama file salah ketik.
+- CSV menggunakan pemisah `;`, tetapi dibaca dengan `read.csv()`.
+- Package Excel belum di-install atau belum dipanggil dengan `library()`.
+
+## Latihan Singkat
+
+Coba buat program sederhana dengan ketentuan berikut:
+
+- Buat data frame berisi nama dan nilai.
+- Simpan data frame ke file CSV.
+- Baca kembali file CSV tersebut.
+- Tambahkan kolom status kelulusan.
+- Simpan hasil akhir ke folder `output`.
